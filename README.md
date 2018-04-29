@@ -8,11 +8,22 @@ To build requires Maven and Java.
 1) From a shell and the sitemapgenerator folder, execute "mvn install"
 TODO Verify dependency installation and add packaging or running instructions and a start script
 
-TODO Extract Requirements from Description Document
 TODO Create algorithm and architecture
 TODO Develop Tests and Code
 
-
+Requirements:
+1) A README.md
+2) Build Instructions
+3) Test Instructions
+4) Run instructions
+5) Trade Offs explaination and reasoning
+6) Possible points of enhancement given more time
+7) A webcrawler that indexes every link in a domain
+8) A sitemap listing the following link details from the base domain
+ 8a) Links to pages in the same domain
+ 8b) Links to pages outside the domain
+ 8c) Links to static content 
+9) Basic view of the output of the data from 8
 
 //****** Original Project Description Document ****************************
 What we are looking for
