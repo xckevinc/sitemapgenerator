@@ -1,5 +1,6 @@
 package org.carter.sitemapgenerator.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,125 +13,78 @@ import org.jsoup.nodes.Document;
 
 
 /**
- * A Webscraper is the foundation class for the business logic of this application.
- * It is responsible for querying URL's, parsing the resultant HTML, and optionally
- * filtering the results
- * @author krcarte
+ * {@inheritDoc}
+ * 
+ * A WebScraper is the primary accessor to the business logic of this application.
+ * It is responsible for querying URL's, then utilizing parsing of the resultant HTML, 
+ * and optionally filtering the results from its parent class AbstractScraper.
+ * 
+ * @author Kevin Carter
  *
  */
 
-public class Webscraper {
+public class WebScraper extends AbstractScraper{
 	
 	/** 
 	 * The immutable url name for this scraper
 	 */
 	private final String urlName;
+
+	/** 
+	 * The immutable file name for this scraper
+	 */
+	
+	private int timeout = 3000;
 	
 	/**
-	 * The jsoup Document lazy instatiated by a query for utility methods to parse
+	 * The log4j logger used to provide class level logging functions
 	 */
-	private Document doc = null;
-	
-	/**
-	 * The log4j logger used to provide class levell logging functions
-	 */
-	private static final Logger LOGGER = LogManager.getLogger("Webscraper");
+	private static final Logger LOGGER = LogManager.getLogger("WebScraper");
 
 	/* 
 	 * The no argument constructor is hidden to force initialization with the urlName
 	 */
-	private Webscraper()
+	private WebScraper()
 	{
-		urlName = null;
+		urlName = "";
 	}
 
 	/**
 	 * Creates a new Webscraper with the given url string.
 	 * @param urlName This is the web address this scraper will crawl
 	 */
-	public Webscraper(String urlName) {
+	public WebScraper(String urlName ) {
 		this.urlName = urlName;
 	}
 	
 	/**
-	 * The Document initializer method that establishes the HTTPConnection to the
-	 * specified urlName
+	 * Optionally specify a timeout following the Builder Pattern
+	 * @param timeout
+	 * @return
 	 */
-	private void initializeDoc()
+	public WebScraper withTimeout( int timeout )
+	{
+		this.timeout = timeout;
+		return this;
+	}
+	
+	/**
+	 * The Document initializer method that either establishes the HTTPConnection to the
+	 * specified name or reads from the local file if this Webscraper was initialized
+	 * with isUrl equal to false.
+	 */
+	protected void initializeDoc()
 	{
 		try {
 			doc = Jsoup.connect(urlName)
 					.data("query", "Java")
 					.userAgent("Mozilla")
 					.cookie("auth", "token")
-					.timeout(3000)
+					.timeout(timeout)
 					.post();
 		} catch (IOException e) {
 			LOGGER.error("Could not establish connection to url: " + urlName, e);
 		}
-	}
-	
-	/**
-	 * Method responsible for lazy instantiating the Document field for other methods to access.
-	 * 
-	 * @return the jsoup document file associated with the url specified in the constructor
-	 */
-	public Optional<Document> getDoc()
-	{
-		if ( doc == null )
-		{
-			initializeDoc();
-		}
-		return Optional.ofNullable( doc );
-	}
-
-	/**
-	 * Used to retrieve the entire HTML content from the Document, if present.
-	 * 
-	 * @return Optional<String> the html string retrieved from the set urlName for this class
-	 */
-	public Optional<String> parseUrl ()
-	{
-		Optional<Document> doc = getDoc();
-		Optional<String> optionalString = Optional.empty();
-		if ( doc.isPresent() )
-		{
-			optionalString = Optional.of(doc.get().wholeText());
-		}
-		return optionalString;
-	}
-
-	/**
-	 * Used to retrieve a collection of all links present in the website found
-	 * at the urlName specified for this scraper.
-	 * 
-	 * @return List<String> a list of links from the target url
-	 */
-	public List<String> retrieveLinks() {
-		List<String> links = new ArrayList();
-		return links;
-	}
-
-	/**
-	 * Used to retrieve a collection of all internal links present in the website found
-	 * at the urlName specified for this scraper.
-	 * 
-	 * @return List<String> a list of links from the target url
-	 */
-	public List<String> retrieveInternalLinks() {
-		List<String> links = new ArrayList();
-		return links;
-	}
-
-	/**
-	 * Used to retrieve a collection of all external links present in the website found
-	 * at the urlName specified for this scraper.
-	 * 
-	 * @return List<String> a list of links from the target url
-	 */
-	public List<String> retrieveExternalLinks() {
-		List<String> links = new ArrayList();
-		return links;
 	}
 
 }

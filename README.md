@@ -4,7 +4,8 @@ text of the exercise can be found at the end of this document.
 //**** Build Instructions ****************
 
 This project is written in java, built with Maven, and developed in Eclipse Oxygen.
-To build requires Maven and Java.
+
+To build requires Maven and Java 1.8.
 1) [Assumed] Checkout the sitemapgenerator project from github
 2) From a shell and the sitemapgenerator folder, execute "mvn install"
 
@@ -53,6 +54,9 @@ Tradeoffs:
   I opted for a flat list and a simple display based on the assumption that a higher priority focus was on process
   and tools rather than improved end user graphics.
   
+  Using JUnit 4 instead of 5.  Since this is 
+  
+  Combining common tasks in the test classes.
   
 
 
