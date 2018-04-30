@@ -1,12 +1,15 @@
 This project is for the Buildit Platform Engineer Exercise.  The full 
 text of the exercise can be found at the end of this document.
 
-//**** Build Instructions ********
+//**** Build Instructions ****************
 
 This project is written in java, built with Maven, and developed in Eclipse Oxygen.
 To build requires Maven and Java.
 1) From a shell and the sitemapgenerator folder, execute "mvn install"
 TODO Verify dependency installation and add packaging or running instructions and a start script
+//****************************************
+
+Design and planning atrifacts are located in sitemapgenerator/design
 
 TODO Create algorithm and architecture
 TODO Develop Tests and Code
