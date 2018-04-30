@@ -5,11 +5,13 @@ text of the exercise can be found at the end of this document.
 
 This project is written in java, built with Maven, and developed in Eclipse Oxygen.
 To build requires Maven and Java.
-1) From a shell and the sitemapgenerator folder, execute "mvn install"
+1) [Assumed] Checkout the sitemapgenerator project from github
+2) From a shell and the sitemapgenerator folder, execute "mvn install"
+
 TODO Verify dependency installation and add packaging or running instructions and a start script
 //****************************************
 
-Design and planning atrifacts are located in sitemapgenerator/design
+Design and planning artifacts are located in sitemapgenerator/design
 
 TODO Create algorithm and architecture
 TODO Develop Tests and Code
@@ -19,7 +21,7 @@ Requirements:
 2) Build Instructions
 3) Test Instructions
 4) Run instructions
-5) Trade Offs explaination and reasoning
+5) Trade Offs explanation and reasoning
 6) Possible points of enhancement given more time
 7) A webcrawler that indexes every link in a domain
 8) A sitemap listing the following link details from the base domain
@@ -27,6 +29,32 @@ Requirements:
  8b) Links to pages outside the domain
  8c) Links to static content 
 9) Basic view of the output of the data from 8
+
+//************** Challenges/Tradeoffs *****************
+This project presents many opportunities to go beyond the minimum but that creates quite a quandary.
+From a software project management perspective I believe it is important in many cases to avoid the 
+distraction and resource utilization developing features or enhancements that go beyond the requirements,
+ or could potentially be wasted by a change in customer direction.  However, going beyond in some cases
+can have positive impacts on customer satisfaction or award capture.  And in the case of this project, 
+hopefully would demonstrate a greater value to the company in this potential future employee (me).  
+
+Normally those decisions are better made as part of a collaborative team with open communication laterally 
+and vertically to key stake holders. Multi-faceted teams with designated opportunities for prototyping and 
+customer interaction would definitely make "going beyond" decisions not such a quandary.
+
+In my experience as a software lead for a large corporation excessive distraction is a bigger obstacle to
+productivity than going beyond is a positive.  It requires experience and maturity.  Hopefully
+my project is evaluated knowing why I chose optimizing efficiency and productivity.
+
+
+Tradeoffs:
+  Initially I planned the architecture for my model around a tree so that the output view could be more easily 
+  structured graphically as a tree, or with more complex graphics objects instead of just a text list.  Instead 
+  I opted for a flat list and a simple display based on the assumption that a higher priority focus was on process
+  and tools rather than improved end user graphics.
+  
+  
+
 
 //****** Original Project Description Document ****************************
 What we are looking for

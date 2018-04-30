@@ -1,6 +1,7 @@
 package org.carter.sitemapgenerator.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 
@@ -21,9 +22,13 @@ public class TestWebscraper extends TestCase {
 	public void testParseUrl()
 	{
 		Webscraper webscraper =  new Webscraper( "http://ozreport.com/");
-		String html = webscraper.parseUrl();
-		int htmlSize = html.length();
-		assertTrue ("The parsed website should have more then 1 character", htmlSize > 0);
+		Optional<String> html = webscraper.parseUrl();
+		assertTrue ( "The parse should have retrieved HTML content from the url", html.isPresent());
+		if ( html.isPresent() )
+			{
+				int htmlSize = html.get().length();
+				assertTrue ("The parsed website should have more then 1 character", htmlSize > 0);
+			}
 	}
 	
 	@Test
