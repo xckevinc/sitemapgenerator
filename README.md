@@ -56,7 +56,19 @@ Tradeoffs:
   
   Using JUnit 4 instead of 5.  Since this is 
   
-  Combining common tasks in the test classes.
+  Combining common tasks in the test classes.  In initial testing it became apparent that I should be testing both
+  live web data as well as local static test data.  Since I had decided to depend on jsoup for HTML parsing, my 
+  Scraper class had to be refactored so as to handle loading HTML from a file or a connection.  Initially it
+  was easier to use my original test classes to verify the functionality of the Scrapers, but the method duplication
+  started to get out of hand so a cycle of rework was needed to consolidate the tests as well (their only fundamental 
+  differences were for reporting results relative to a file or url source).
+   
+  What to do about treating sub-domains as different or the same domain?  For example, money.cnn.com is a
+  sub-domain of cnn.com.  Should these two domains be considered separate or equal when evaluating links
+  to be "internal" or "external?"
+  
+Going Beyond:
+	Create configuration files for test cases to use multiple source html files to verify results
   
 
 
