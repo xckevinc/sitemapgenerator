@@ -2,9 +2,11 @@ package org.carter.sitemapgenerator.controller;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 
@@ -17,10 +19,13 @@ import junit.framework.TestCase;
  * @author Kevin Carter
  *
  */
-public class TestWebScraper extends TestCase {
+public class TestWebScraper extends TestAbstractScraper {
 
-	private static final String TEST_URL = "http://www.cnn.com"; 
-	//	private static final String TEST_URL = "http://ozreport.com/";
+	/**
+	 * This text file declares the parameters for the test run.  It is a list containing link counts
+	 * and URL names for the test data
+	 */
+	private String testConfigFile = "/org/carter/sitemapgenerator/controller/testUrlConfig.txt";
 
 	/**
 	 * Default URL timeout time for connecting to websites.  My chosen sample site
@@ -28,54 +33,49 @@ public class TestWebScraper extends TestCase {
 	 */
 	private static final int DEFAULT_URL_TIMEOUT = 25000;
 
+
+	public void testAllUrlScraperMethods ( String urlName, int totalLinkCount, 
+			int totalInternalLinkCount, int totalExternalLinkCount,
+			int totalImageCount ) 
+					throws Exception{
+		Scraper webscraper =  new WebScraper(urlName).withTimeout(DEFAULT_URL_TIMEOUT);
+		Optional<Elements> links = webscraper.retrieveExternalLinks();
+		testAllScraperMethods ( webscraper,  totalLinkCount, totalInternalLinkCount,  totalExternalLinkCount,
+				 totalImageCount );
+	}
+
 	/**
-	 * This test verifies the ability to connect to a website and retrieve something
+	 * This test uses the file testUrlConfig.txt to specify which data files should be parsed and what their
+	 * expected results are.  The file format is number of links, number of internal links
+	 * number of external links, number of images, and URL.
+	 * 
+	 * @throws Exception if any fields in the testConfig file are not properly formatted or if any test fails
+	 * 
 	 */
 	@Test
-	public void testParseUrl()
-	{
-		Scraper webscraper =  new WebScraper( TEST_URL).withTimeout(DEFAULT_URL_TIMEOUT);
-		Optional<String> html = webscraper.parseHtmlDocument();
-		assertTrue ( "The parse should have retrieved HTML content from the url", html.isPresent());
-		if ( html.isPresent() )
-		{
-			int htmlSize = html.get().length();
-			assertTrue ("The parsed website should have more then 1 character", htmlSize > 0);
+	public void testWebScraper () 
+			throws Exception{
+
+		List<Object> testConfigParams = retrieveConfiguration(testConfigFile);
+		testConfigParams.forEach( configParams -> {
+			
+		LOGGER.trace ( "Testing url with configuration parameters: " + 
+						"url:" + ((List<Object>) configParams).get(4) + 
+						" totalLinks:" + ((List<Object>)configParams).get(0) +
+						" Internal Links:" + ((List<Object>)configParams).get(1) + 
+						" External Links:" +((List<Object>) configParams).get(2) + 
+						" Images:" + ((List<Object>)configParams).get(3));
+		try {
+			testAllUrlScraperMethods((String)((List<Object>)configParams).get(4), 
+									(Integer)((List<Object>)configParams).get(0), 
+									(Integer)((List<Object>)configParams).get(1), 
+									(Integer)((List<Object>)configParams).get(2), 
+									(Integer)((List<Object>)configParams).get(3));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	}
-
-
-	@Test
-	public void testRetrieveLinksFromUrl()
-	{
-		Scraper webscraper =  new WebScraper( TEST_URL).withTimeout(DEFAULT_URL_TIMEOUT);
-		Optional<Elements> links = webscraper.retrieveLinks();
-		assertTrue ( "The parsed website should return a set of links", links.isPresent()); 
-		if ( links.isPresent() )
-		{
-			int linksSize = links.get().size();
-			assertTrue ("The parsed website should return at least one link", linksSize > 0 );
-		}
-	}
-
-	@Test
-	public void testRetrieveInternalLinksFromUrl() {
-		Scraper webscraper =  new WebScraper( TEST_URL).withTimeout(DEFAULT_URL_TIMEOUT);
-		Optional<Elements> links = webscraper.retrieveInternalLinks();
-		assertTrue ( "The parsed website should return a set of links", links.isPresent()); 
-		if ( links.isPresent() )
-		{
-			int linksSize = links.get().size();
-			assertTrue ("The parsed website should return at least one internal link", linksSize > 0 );
-		}
-	}
-
-	@Test
-	public void testRetrieveExternalLinksFromUrl() {
-		Scraper webscraper =  new WebScraper( TEST_URL).withTimeout(DEFAULT_URL_TIMEOUT);
-		Optional<Elements> links = webscraper.retrieveExternalLinks();
-//		int linksSize = links.size();
-//		assertTrue ("The parsed website should return at least one external link", linksSize > 0 );
+		});
 	}
 
 }

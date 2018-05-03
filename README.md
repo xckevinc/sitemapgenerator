@@ -71,7 +71,8 @@ Tradeoffs:
   Creating configuration files for test cases to use multiple source html files to verify results creates a 
   dilemma for the structure of my test classes.  My preference is to use multiple granular tests for each method
   in the Scraper classes but by wrapping them into one parent test makes it easier for me to pull test conditions
-  directly from a file.
+  directly from a file, and greatly increase the test data set.  The negative is now, if a method test fails, then
+  other method tests are not completed.
   
   Test suite structure:  I have worked to make the testing more comprehensive at the expense of speed.  Given 
   more time and real goals in a production environment, I would have separated these by scope so that developmental

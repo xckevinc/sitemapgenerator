@@ -14,6 +14,10 @@ import org.junit.Test;
  */
 public class TestFileScraper extends TestAbstractScraper {
 
+	/**
+	 * This text file declares the parameters for the test run.  It is a list containing link counts
+	 * and file names for the test data
+	 */
 	private String testConfigFile = "/org/carter/sitemapgenerator/controller/testFileConfig.txt";
 
 	public TestFileScraper ()
@@ -43,8 +47,23 @@ public class TestFileScraper extends TestAbstractScraper {
 	public void testFileScraper () 
 			throws Exception{
 
-		List<Object> configParams = retrieveConfiguration(testConfigFile);
-		testAllFileScraperMethods((String)configParams.get(4), (String)configParams.get(5), (Integer)configParams.get(0), (Integer)configParams.get(1), (Integer)configParams.get(2), (Integer)configParams.get(3));
+		List<Object> testConfigParams = retrieveConfiguration(testConfigFile);
+		testConfigParams.forEach( configParams -> 
+		{
+			try {
+				LOGGER.trace ("Testing file with configuration parameters: " + 
+						"fileName:" + ((List<Object>) configParams).get(4) + 
+						" baseUri:" + ((List<Object>) configParams).get(5) +
+						" totalLinks:" + ((List<Object>) configParams).get(0) +
+						" Internal Links:" + ((List<Object>) configParams).get(1) + 
+						" External Links:" + ((List<Object>) configParams).get(2) + 
+						" Images:" + ((List<Object>) configParams).get(3));
+				testAllFileScraperMethods((String)((List<Object>) configParams).get(4), (String)((List<Object>) configParams).get(5), (Integer)((List<Object>) configParams).get(0), (Integer)((List<Object>) configParams).get(1), (Integer)((List<Object>) configParams).get(2), (Integer)((List<Object>) configParams).get(3));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
 	}
 
 }
