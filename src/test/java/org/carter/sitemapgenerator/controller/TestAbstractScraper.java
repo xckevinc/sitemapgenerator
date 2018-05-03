@@ -108,12 +108,12 @@ public abstract class TestAbstractScraper extends TestCase {
 					continue;
 				}
 				lineScanner = new Scanner ( configString );
-				configValues.add( lineScanner.nextInt()); // totalLinkCount 
-				configValues.add( lineScanner.nextInt()); // totalInternalLinkCount 
-				configValues.add( lineScanner.nextInt()); // totalExternalLinkCount 
-				configValues.add( lineScanner.nextInt()); // totalImageCount 
-				configValues.add( lineScanner.next()); // fileName
-				configValues.add( lineScanner.next()); // baseUri 
+				addInt(lineScanner, configValues);// totalLinkCount 
+				addInt(lineScanner, configValues);// totalInternalLinkCount 
+				addInt(lineScanner, configValues);// totalExternalLinkCount 
+				addInt(lineScanner, configValues);// totalImageCount 
+				addString(lineScanner, configValues);// fileName
+				addString(lineScanner, configValues);// baseUri 
 			}
 		}
 		return configValues;
