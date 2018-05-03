@@ -59,21 +59,20 @@ public class TestWebScraper extends TestAbstractScraper {
 		List<Object> testConfigParams = retrieveConfiguration(testConfigFile);
 		testConfigParams.forEach( configParams -> {
 			
-		LOGGER.trace ( "Testing url with configuration parameters: " + 
-						"url:" + ((List<Object>) configParams).get(4) + 
-						" totalLinks:" + ((List<Object>)configParams).get(0) +
-						" Internal Links:" + ((List<Object>)configParams).get(1) + 
-						" External Links:" +((List<Object>) configParams).get(2) + 
-						" Images:" + ((List<Object>)configParams).get(3));
-		try {
+		try { // A try catch in a jUnit test is ugly but is required in this case due to the forEach + lambda
+			LOGGER.trace ( "Testing url with configuration parameters: " + 
+					"url:" + ((List<Object>) configParams).get(4) + 
+					" totalLinks:" + ((List<Object>)configParams).get(0) +
+					" Internal Links:" + ((List<Object>)configParams).get(1) + 
+					" External Links:" + ((List<Object>) configParams).get(2) + 
+					" Images:" + ((List<Object>)configParams).get(3));
 			testAllUrlScraperMethods((String)((List<Object>)configParams).get(4), 
 									(Integer)((List<Object>)configParams).get(0), 
 									(Integer)((List<Object>)configParams).get(1), 
 									(Integer)((List<Object>)configParams).get(2), 
 									(Integer)((List<Object>)configParams).get(3));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGGER.error ("Failed parsing the " + testConfigFile + " file for test execution", e);
 		}
 		});
 	}

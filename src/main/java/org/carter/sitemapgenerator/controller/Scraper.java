@@ -55,4 +55,6 @@ public interface Scraper {
 	 */
 	Optional<Document> getDoc();
 
+	Optional<Elements> retrieveImages();
+
 }

@@ -50,7 +50,7 @@ public class TestFileScraper extends TestAbstractScraper {
 		List<Object> testConfigParams = retrieveConfiguration(testConfigFile);
 		testConfigParams.forEach( configParams -> 
 		{
-			try {
+			try { // A try catch in a jUnit test is ugly but is required in this case due to the forEach + lambda
 				LOGGER.trace ("Testing file with configuration parameters: " + 
 						"fileName:" + ((List<Object>) configParams).get(4) + 
 						" baseUri:" + ((List<Object>) configParams).get(5) +
@@ -60,8 +60,7 @@ public class TestFileScraper extends TestAbstractScraper {
 						" Images:" + ((List<Object>) configParams).get(3));
 				testAllFileScraperMethods((String)((List<Object>) configParams).get(4), (String)((List<Object>) configParams).get(5), (Integer)((List<Object>) configParams).get(0), (Integer)((List<Object>) configParams).get(1), (Integer)((List<Object>) configParams).get(2), (Integer)((List<Object>) configParams).get(3));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				LOGGER.error ("Failed parsing the " + testConfigFile + " file for test execution", e);
 			}
 		});
 	}

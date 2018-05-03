@@ -87,6 +87,23 @@ public abstract class AbstractScraper implements Scraper{
 	
 	
 	/**
+	 * Parses the HTML and retrieves a collection of all the images found.
+	 * 
+	 * @return Optional<Elements> a collection of img refs
+	 */
+	@Override
+	public Optional<Elements> retrieveImages() {
+		Optional<Document> doc = getDoc();
+		Optional<Elements> images = Optional.empty();
+		if ( doc.isPresent() )
+		{
+			images = Optional.of (doc.get().getElementsByTag("img"));
+		}
+		return images;
+	}
+	
+	
+	/**
 	 * This is a simple conditional test to verify if an Element
 	 * contains its baseUri in the actual href.  This conditional does not treat sub-domains
 	 * as part of the same domain, also referred to as an "Internal Link".  For example, money.cnn.com
@@ -110,6 +127,7 @@ public abstract class AbstractScraper implements Scraper{
 	private static boolean isExternalLink ( Element element ){
 		return !isInternalLink(element);
 	}
+	
 
 	/**
 	 * This method uses the boolean Predicate p to determine which Elements from the elements
@@ -151,5 +169,6 @@ public abstract class AbstractScraper implements Scraper{
 	 * the responsibility of the concrete sub classes to initialize this Object
 	 */
 	protected abstract void initializeDoc();
+
 
 }

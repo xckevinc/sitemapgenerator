@@ -61,6 +61,20 @@ public abstract class TestAbstractScraper extends TestCase {
 		LOGGER.trace ( "*************** testRetrieveExternalLinks PASSED ********** for " + scraper.getDoc().get().title() );
 
 	}
+	
+	public void testRetrieveImages(Scraper scraper, int totalImageCount) 
+			throws Exception {
+
+		assertTrue ( "The html document should have parsed", scraper.getDoc().isPresent());
+		Optional<Elements> images = scraper.retrieveImages();
+		assertTrue ( "The parse of " + scraper.getDoc().get().title() + "should return a set images", 
+				images.isPresent()); 
+		int linksSize = images.get().size();
+		assertEquals ("The parse of " + scraper.getDoc().get().title() + "should return an exact number of images", 
+				totalImageCount, linksSize );
+		LOGGER.trace ( "*************** testRetrieveImages PASSED ********** for " + scraper.getDoc().get().title() );
+
+	}
 
 	/**
 	 * This test verifies the ability to connect to html and retrieve something
@@ -86,6 +100,7 @@ public abstract class TestAbstractScraper extends TestCase {
 		testRetrieveLinks(scraper, totalLinkCount);
 		testRetrieveInternalLinks(scraper, totalInternalLinkCount);
 		testRetrieveExternalLinks(scraper, totalExternalLinkCount);
+		testRetrieveImages(scraper, totalImageCount);
 	}
 
 	
