@@ -54,7 +54,8 @@ Tradeoffs:
   I opted for a flat list and a simple display based on the assumption that a higher priority focus was on process
   and tools rather than improved end user graphics.
   
-  Using JUnit 4 instead of 5.  Since this is 
+  Using JUnit 4 instead of 5.  I opted for JUnit 4 based on familiarity and less chance for conflicts with the Maven
+   
   
   Combining common tasks in the test classes.  In initial testing it became apparent that I should be testing both
   live web data as well as local static test data.  Since I had decided to depend on jsoup for HTML parsing, my 
@@ -71,6 +72,14 @@ Tradeoffs:
   dilemma for the structure of my test classes.  My preference is to use multiple granular tests for each method
   in the Scraper classes but by wrapping them into one parent test makes it easier for me to pull test conditions
   directly from a file.
+  
+  Test suite structure:  I have worked to make the testing more comprehensive at the expense of speed.  Given 
+  more time and real goals in a production environment, I would have separated these by scope so that developmental
+  tests would not rely on file operations, data sets, and even web queries to keep speed up.  For this project I
+  was more interested in providing more then just bare bones testing so the suite has been structured this way.  
+  Going beyond, I would like to add other scopes to handle different testing scenarios.
+  
+  
   
 
 

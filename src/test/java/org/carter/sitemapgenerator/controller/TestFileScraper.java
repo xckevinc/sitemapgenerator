@@ -1,7 +1,7 @@
 package org.carter.sitemapgenerator.controller;
 
 import java.io.File;
-import java.util.Scanner;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ import org.junit.Test;
  */
 public class TestFileScraper extends TestAbstractScraper {
 
-	private String testConfigFile = "/org/carter/sitemapgenerator/controller/testConfig.txt";
+	private String testConfigFile = "/org/carter/sitemapgenerator/controller/testFileConfig.txt";
 
 	public TestFileScraper ()
 	{
@@ -27,10 +27,8 @@ public class TestFileScraper extends TestAbstractScraper {
 					throws Exception{
 		File file = new File(getClass().getResource(fileName).toURI());
 		Scraper fileScraper =  new FileScraper(file, baseUri);
-		testParseHtml(fileScraper);
-		testRetrieveLinks(fileScraper, totalLinkCount);
-		testRetrieveInternalLinks(fileScraper, totalInternalLinkCount);
-		testRetrieveExternalLinks(fileScraper, totalExternalLinkCount);
+		testAllScraperMethods ( fileScraper,  totalLinkCount, totalInternalLinkCount,  totalExternalLinkCount,
+				 totalImageCount );
 	}
 
 	/**
@@ -43,29 +41,10 @@ public class TestFileScraper extends TestAbstractScraper {
 	 */
 	@Test
 	public void testFileScraper () 
-			throws Exception
-	{
-		try (Scanner scanner = new Scanner(new File(getClass().getResource(testConfigFile).toURI()));) {
-			Scanner lineScanner;
-			while ( scanner.hasNext())
-			{
-				String configString = scanner.nextLine();
-				// Drop out of the loop if the line begins with a comment delimiter
-				if ( configString.startsWith("#") )
-				{
-					continue;
-				}
-				lineScanner = new Scanner ( configString );
-				String fileName = lineScanner.next();
-				String baseUri = lineScanner.next();
-				int totalLinkCount = lineScanner.nextInt();
-				int totalInternalLinkCount = lineScanner.nextInt();
-				int totalExternalLinkCount = lineScanner.nextInt();
-				int totalImageCount = lineScanner.nextInt();
+			throws Exception{
 
-				testAllFileScraperMethods(fileName, baseUri, totalLinkCount, totalInternalLinkCount, totalExternalLinkCount, totalImageCount);
-			}
-		}
+		List<Object> configParams = retrieveConfiguration(testConfigFile);
+		testAllFileScraperMethods((String)configParams.get(4), (String)configParams.get(5), (Integer)configParams.get(0), (Integer)configParams.get(1), (Integer)configParams.get(2), (Integer)configParams.get(3));
 	}
 
 }
