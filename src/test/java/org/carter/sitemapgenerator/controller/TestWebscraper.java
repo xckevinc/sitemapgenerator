@@ -55,7 +55,6 @@ public class TestWebScraper extends TestCase {
 		{
 			int linksSize = links.get().size();
 			assertTrue ("The parsed website should return at least one link", linksSize > 0 );
-			System.out.println( "# links: " + linksSize);
 		}
 	}
 
@@ -68,7 +67,6 @@ public class TestWebScraper extends TestCase {
 		{
 			int linksSize = links.get().size();
 			assertTrue ("The parsed website should return at least one internal link", linksSize > 0 );
-			System.out.println( "# links: " + linksSize);
 		}
 	}
 

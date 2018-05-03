@@ -1,14 +1,9 @@
 package org.carter.sitemapgenerator.controller;
 
 import java.io.File;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
+import java.util.Scanner;
 
-import org.jsoup.select.Elements;
 import org.junit.Test;
-
-import junit.framework.TestCase;
 
 /**
  * A set of tests for retrieving and parsing HTML from a file.  These tests will define the structure
@@ -17,78 +12,59 @@ import junit.framework.TestCase;
  * @author Kevin Carter
  *
  */
-public class TestFileScraper extends TestCase {
-	
-//	private static final String TEST_HTML_FILE = "/org/carter/sitemapgenerator/controller/ozreport.html";
-//	private static final int TOTAL_LINK_COUNT = 217;
-//	private static final String TEST_HTML_FILE = "/org/carter/sitemapgenerator/controller/Apache.html";
-//	private static final int TOTAL_LINK_COUNT = 334;
-	
-	private static final String TEST_HTML_FILE = "/org/carter/sitemapgenerator/controller/jsoup.html";
-	private static final String TEST_BASE_URI = "https://jsoup.org/";
-	private static final int TOTAL_LINK_COUNT = 45;
-	private static final int TOTAL_INTERNAL_LINK_COUNT = 36;
-	private static final int TOTAL_EXTERNAL_LINK_COUNT = 9;
+public class TestFileScraper extends TestAbstractScraper {
 
-	
+	private String testConfigFile = "/org/carter/sitemapgenerator/controller/testConfig.txt";
+
+	public TestFileScraper ()
+	{
+		super ("TestFileScraper");
+	}
+
+	public void testAllFileScraperMethods ( String fileName, String baseUri, int totalLinkCount, 
+			int totalInternalLinkCount, int totalExternalLinkCount,
+			int totalImageCount ) 
+					throws Exception{
+		File file = new File(getClass().getResource(fileName).toURI());
+		Scraper fileScraper =  new FileScraper(file, baseUri);
+		testParseHtml(fileScraper);
+		testRetrieveLinks(fileScraper, totalLinkCount);
+		testRetrieveInternalLinks(fileScraper, totalInternalLinkCount);
+		testRetrieveExternalLinks(fileScraper, totalExternalLinkCount);
+	}
+
 	/**
-	 * This test verifies the ability to connect to a local file and retrieve something
-	 * @throws URISyntaxException 
+	 * This test uses the file testConfig.txt to specify which data files should be parsed and what their
+	 * expected results are.  The file format is filename, base uri, number of links, number of internal links
+	 * number of external links, and number of images.
+	 * 
+	 * @throws Exception if any fields in the testConfig file are not properly formatted or if any test fails
+	 * 
 	 */
 	@Test
-	public void testParseFile() throws URISyntaxException
+	public void testFileScraper () 
+			throws Exception
 	{
-		File file = new File(getClass().getResource(TEST_HTML_FILE).toURI());
-		Scraper fileScraper =  new FileScraper(file, TEST_BASE_URI);
-		Optional<String> html = fileScraper.parseHtmlDocument();
-		assertTrue ( "The parse should have retrieved HTML content from the local file", html.isPresent());
-		if ( html.isPresent() )
+		try (Scanner scanner = new Scanner(new File(getClass().getResource(testConfigFile).toURI()));) {
+			Scanner lineScanner;
+			while ( scanner.hasNext())
 			{
-				int htmlSize = html.get().length();
-				assertTrue ("The parsed html file should have more then 1 character", htmlSize > 0);
+				String configString = scanner.nextLine();
+				// Drop out of the loop if the line begins with a comment delimiter
+				if ( configString.startsWith("#") )
+				{
+					continue;
+				}
+				lineScanner = new Scanner ( configString );
+				String fileName = lineScanner.next();
+				String baseUri = lineScanner.next();
+				int totalLinkCount = lineScanner.nextInt();
+				int totalInternalLinkCount = lineScanner.nextInt();
+				int totalExternalLinkCount = lineScanner.nextInt();
+				int totalImageCount = lineScanner.nextInt();
+
+				testAllFileScraperMethods(fileName, baseUri, totalLinkCount, totalInternalLinkCount, totalExternalLinkCount, totalImageCount);
 			}
-	}
-	
-	@Test
-	public void testRetrieveLinksFromFile() throws URISyntaxException
-	{
-		File file = new File(getClass().getResource(TEST_HTML_FILE).toURI());
-		Scraper fileScraper =  new FileScraper(file, TEST_BASE_URI);
-		Optional<Elements> links = fileScraper.retrieveLinks();
-		assertTrue ( "The parsed html file should return a set of links", links.isPresent()); 
-		if ( links.isPresent() )
-		{
-			int linksSize = links.get().size();
-			assertEquals ("The parsed html file should return an exact number of links.", TOTAL_LINK_COUNT,  linksSize );
-		}
-	}
-	
-	
-	@Test
-	public void testRetrieveInternalLinksFromFile() throws URISyntaxException {
-		File file = new File(getClass().getResource(TEST_HTML_FILE).toURI());
-		Scraper fileScraper =  new FileScraper(file, TEST_BASE_URI);
-		Optional<Elements> links = fileScraper.retrieveInternalLinks();
-		assertTrue ( "The parsed website should return a set of links", links.isPresent()); 
-		if ( links.isPresent() )
-		{
-			int linksSize = links.get().size();
-			assertEquals ("The parsed html file should return an exact number of internal links", TOTAL_INTERNAL_LINK_COUNT, linksSize );
-			System.out.println( "# links: " + linksSize);
-		}
-	}
-	
-	@Test
-	public void testRetrieveExternalLinksFromFile() throws URISyntaxException {
-		File file = new File(getClass().getResource(TEST_HTML_FILE).toURI());
-		Scraper fileScraper =  new FileScraper(file, TEST_BASE_URI);		
-		Optional<Elements> links = fileScraper.retrieveExternalLinks();
-		assertTrue ( "The parsed website should return a set of links", links.isPresent()); 
-		if ( links.isPresent() )
-		{
-			int linksSize = links.get().size();
-			assertEquals ("The parsed html file should return an exact number of external links", TOTAL_EXTERNAL_LINK_COUNT, linksSize );
-			System.out.println( "# links: " + linksSize);
 		}
 	}
 

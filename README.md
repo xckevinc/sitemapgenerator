@@ -67,8 +67,10 @@ Tradeoffs:
   sub-domain of cnn.com.  Should these two domains be considered separate or equal when evaluating links
   to be "internal" or "external?"
   
-Going Beyond:
-	Create configuration files for test cases to use multiple source html files to verify results
+  Creating configuration files for test cases to use multiple source html files to verify results creates a 
+  dilemma for the structure of my test classes.  My preference is to use multiple granular tests for each method
+  in the Scraper classes but by wrapping them into one parent test makes it easier for me to pull test conditions
+  directly from a file.
   
 
 

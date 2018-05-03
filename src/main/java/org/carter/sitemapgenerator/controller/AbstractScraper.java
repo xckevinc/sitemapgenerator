@@ -88,7 +88,11 @@ public abstract class AbstractScraper implements Scraper{
 	
 	/**
 	 * This is a simple conditional test to verify if an Element
-	 * contains its baseUri in the actual href
+	 * contains its baseUri in the actual href.  This conditional does not treat sub-domains
+	 * as part of the same domain, also referred to as an "Internal Link".  For example, money.cnn.com
+	 * and cnn.com are treated as different domains and links from one to the other are not considered 
+	 * Internal.
+	 * 
 	 * @param element the Element to be checked against the baseUri
 	 * @return boolean representing if the Element contains the baseUri 
 	 */
