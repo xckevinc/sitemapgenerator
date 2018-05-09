@@ -32,7 +32,8 @@ public abstract class TestAbstractScraper extends TestCase {
 		Optional<Elements> links = scraper.retrieveLinks();
 		assertTrue ("The parse of " + scraper.getDoc().get().title() + "should return a set of links", links.isPresent()); 
 		int linksSize = links.get().size();
-		assertEquals ("The parsed html should return an exact number of links.", totalLinkCount,  linksSize );
+		assertEquals ("The parse of " + scraper.getDoc().get().title() + "should return an exact number of links.", 
+					   totalLinkCount,  linksSize );
 		LOGGER.trace ( "*************** testRetrieveLinks PASSED ********** for " + scraper.getDoc().get().title() );
 	}
 

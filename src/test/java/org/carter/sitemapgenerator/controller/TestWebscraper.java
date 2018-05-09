@@ -59,7 +59,7 @@ public class TestWebScraper extends TestAbstractScraper {
 		List<Object> testConfigParams = retrieveConfiguration(testConfigFile);
 		testConfigParams.forEach( configParams -> {
 			
-		try { // A try catch in a jUnit test is ugly but is required in this case due to the forEach + lambda
+		try { // A try catch in a JUnit test is ugly but is required in this case due to the forEach + lambda
 			LOGGER.trace ( "Testing url with configuration parameters: " + 
 					"url:" + ((List<Object>) configParams).get(4) + 
 					" totalLinks:" + ((List<Object>)configParams).get(0) +
