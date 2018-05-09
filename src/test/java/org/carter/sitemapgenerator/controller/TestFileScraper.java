@@ -20,10 +20,6 @@ public class TestFileScraper extends TestAbstractScraper {
 	 */
 	private String testConfigFile = "/org/carter/sitemapgenerator/controller/testFileConfig.txt";
 
-	public TestFileScraper ()
-	{
-		super ("TestFileScraper");
-	}
 
 	public void testAllFileScraperMethods ( String fileName, String baseUri, int totalLinkCount, 
 			int totalInternalLinkCount, int totalExternalLinkCount,

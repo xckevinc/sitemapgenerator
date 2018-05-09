@@ -1,5 +1,8 @@
 package org.carter.sitemapgenerator.controller;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,20 +13,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.select.Elements;
 
-import junit.framework.TestCase;
 
-public abstract class TestAbstractScraper extends TestCase {
+public abstract class TestAbstractScraper {
 
 	
 	protected Logger LOGGER = LogManager.getLogger( "TestAbstractScraper");
 	
-	public TestAbstractScraper() {
-		super();
-	}
-
-	public TestAbstractScraper(String name) {
-		super(name);
-	}
 
 	public void testRetrieveLinks(Scraper scraper, int totalLinkCount) 
 			throws Exception {
