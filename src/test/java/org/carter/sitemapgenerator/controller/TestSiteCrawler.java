@@ -14,8 +14,15 @@ import org.carter.sitemapgenerator.model.PageModel;
 import org.carter.sitemapgenerator.model.SitemapModel;
 import org.junit.Test;
 
+
 public class TestSiteCrawler {
 
+	/*
+	 * This is more of an integration test then a Unit Test since it depends on other objects
+	 * and the internet.  
+	 * 
+	 * TODO: Make file based testing so that internet inconsistencies do not cause failure. 
+	 */
 	protected Logger LOGGER = LogManager.getLogger(TestSiteCrawler.class);
 	
 	private static final int DEFAULT_URL_TIMEOUT = 25000;
@@ -25,12 +32,11 @@ public class TestSiteCrawler {
 		// NOTES
 		// need a SiteModel mock
 		// need PageModel mocks - returns a set of external links, totals external links?
-		//Scraper scraper = new WebScraper("https://www.apache.org/").withTimeout(DEFAULT_URL_TIMEOUT);
 		
-//		SiteCrawler siteGenerator = new SiteCrawler("https://jsoup.org/").withTimeout(DEFAULT_URL_TIMEOUT); 
-		SiteCrawler siteGenerator = new SiteCrawler("https://www.apache.org/").withTimeout(DEFAULT_URL_TIMEOUT); 
+		SiteCrawler siteGenerator = new SiteCrawler("https://jsoup.org/").withTimeout(DEFAULT_URL_TIMEOUT); 
+		//siteGenerator = new SiteCrawler("https://www.apache.org/").withTimeout(DEFAULT_URL_TIMEOUT); 
 
-		//SiteCrawler siteGenerator = new SiteCrawler("http://ralstones.jeffcopublicschools.org/").withTimeout(DEFAULT_URL_TIMEOUT); 
+		//siteGenerator = new SiteCrawler("http://ralstones.jeffcopublicschools.org/").withTimeout(DEFAULT_URL_TIMEOUT); 
 		SitemapModel sitemapModel = siteGenerator.generateSiteMap();
 		LOGGER.trace ( "Has Size:" + sitemapModel.size() );
 		assertTrue("sitemapModel has content", sitemapModel.size() > 0 );
