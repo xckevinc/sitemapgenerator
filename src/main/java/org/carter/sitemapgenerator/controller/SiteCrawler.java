@@ -58,12 +58,7 @@ public class SiteCrawler {
 		ArrayList<Element> links = pageModel.getInternalLinks();
 		for ( int i = 0; i < links.size(); i++ )
 		{
-			Element link = links.get(i);
-			//LOGGER.trace ( "Analyzing link: " + link.absUrl("href") );
-			analyzeHtml( link.absUrl("href"), sitemapModel);
-			//					Set<String> keySet = sitemapModel.getPages().keySet();
-			//					keySet.forEach(key->	LOGGER.trace ( "Page Key:" + key));
-
+			analyzeHtml( links.get(i).absUrl("href"), sitemapModel);
 		}
 	}
 
@@ -73,7 +68,6 @@ public class SiteCrawler {
 		Scraper scraper = new WebScraper(url).withTimeout(timeout);
 		PageModel pageModel = new PageModel(url);
 		pageModel.setTitle(scraper.getDoc().get().title());
-
 
 		if ( scraper.retrieveExternalLinks().isPresent() ){
 			pageModel.setExternalLinks(scraper.retrieveExternalLinks().get());
