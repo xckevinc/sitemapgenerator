@@ -39,7 +39,6 @@ public class TestWebScraper extends TestAbstractScraper {
 			int totalImageCount ) 
 					throws Exception{
 		Scraper webscraper =  new WebScraper(urlName).withTimeout(DEFAULT_URL_TIMEOUT);
-		Optional<Elements> links = webscraper.retrieveExternalLinks();
 		testAllScraperMethods ( webscraper,  totalLinkCount, totalInternalLinkCount,  totalExternalLinkCount,
 				 totalImageCount );
 	}

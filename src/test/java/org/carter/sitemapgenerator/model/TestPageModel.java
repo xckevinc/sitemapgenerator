@@ -10,7 +10,11 @@ import org.jsoup.select.Elements;
 import org.junit.Before;
 import org.junit.Test;
 
-
+/**
+ * Tests the PageModel for basic accessors
+ * @author krcarte
+ *
+ */
 public class TestPageModel  {
 
 	protected Element element1;
@@ -24,7 +28,7 @@ public class TestPageModel  {
 	@Before
 	public void runBeforeEachTest()
 	{
-		sut = new PageModel();
+		sut = new PageModel("Title");
 		element1 = new Element("test1");
 		element2 = new Element("test2");
 		elements = new Elements();

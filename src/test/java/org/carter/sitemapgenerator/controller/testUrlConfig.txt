@@ -1,2 +1,2 @@
-#220 163 57 22 http://www.cnn.com 
-#201 171 30 19 http://ozreport.com
+220 163 57 22 http://www.cnn.com 
+201 171 30 19 http://ozreport.com

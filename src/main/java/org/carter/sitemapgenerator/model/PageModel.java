@@ -2,6 +2,7 @@ package org.carter.sitemapgenerator.model;
 
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.message.Message;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -18,10 +19,18 @@ public class PageModel {
 	
 	private Elements imageRefs;
 
-	public PageModel() {
+	private String title;
+
+	private String url;
+
+	private PageModel()
+	{}
+	
+	public PageModel(String url) {
 		externalLinks = new Elements();
 		internalLinks = new Elements();
 		imageRefs = new Elements();
+		this.url = url;
 	}
 	
 	public void setExternalLinks(Elements externalLinks) {
@@ -71,6 +80,22 @@ public class PageModel {
 
 	public int getImageRefCount() {
 		return imageRefs.size();
+	}
+
+	public String getTitle() {
+		return title;
+	}
+	
+	public void setTitle (String title) {
+		this.title = title;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+	
+	public void setUrl( String url ) {
+		this.url = url;
 	}
 
 

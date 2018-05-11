@@ -1,7 +1,10 @@
 package org.carter.sitemapgenerator.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * A SitemapModel is an ADT comprised of a collection of page metadata all derived from a common root domain
@@ -14,22 +17,40 @@ public class SitemapModel {
 	 * this being an ADT in case other behavior was needed.
 	 */
 
-	private List<PageModel> pages;
+	private Map<String, PageModel> pages;
 	
 	public SitemapModel() {
-		pages = new ArrayList<>();
+		pages = new HashMap<>();
 	}
 	
-	public void add(PageModel pageModel) {
-		pages.add(pageModel);
+	public void set(PageModel pageModel) {
+		pages.put(pageModel.getUrl(), pageModel);
+	}
+	
+	public boolean add(PageModel pageModel) {
+		if ( containsUrl(pageModel.getUrl()) )
+		{
+			return false;
+		}
+		pages.put(pageModel.getUrl(), pageModel);
+		return true;
 	}
 
-	public Object size() {
+	public int size() {
 		return pages.size();
 	}
+	
+	public boolean containsUrl (String url) {
+		return get(url).isPresent();
+	}
 
-	public PageModel get(int index) {
-		return pages.get(index);
+	public Optional<PageModel> get(String url) {
+		Optional<PageModel> optional = Optional.ofNullable(pages.get(url));
+		return optional;
+	}
+	
+	public Map <String, PageModel> getPages(){
+		return pages;
 	}
 
 }

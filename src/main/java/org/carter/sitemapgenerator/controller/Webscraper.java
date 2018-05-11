@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -82,6 +83,15 @@ public class WebScraper extends AbstractScraper{
 					.cookie("auth", "token")
 					.timeout(timeout)
 					.post();
+			
+			LOGGER.trace ( "Connecting to:" + urlName);
+//			Connection con = Jsoup.connect(urlName)
+//					.data("query", "Java")
+//					.userAgent("Mozilla")
+//					.cookie("auth", "token")
+//					.timeout(timeout);
+//			Connection.Response resp = con.execute();
+//			doc = con.post();
 		} catch (IOException e) {
 			LOGGER.error("Could not establish connection to url: " + urlName, e);
 		}

@@ -1,6 +1,9 @@
 package org.carter.sitemapgenerator.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,6 +11,11 @@ import org.mockito.Mockito;
 
 import junit.framework.TestCase;
 
+/**
+ * Test the SitemapModel accessors
+ * @author krcarte
+ *
+ */
 public class TestSitemapModel {
 
 	/*
@@ -22,7 +30,10 @@ public class TestSitemapModel {
 	public void setup()
 	{
 		 sut = new SitemapModel();
-		 pageModel = Mockito.mock ( PageModel.class );
+		 pageModel = new PageModel ("TestUrl");
+		 // TODO This data should be mocked, I will come back to it or consider this a noted point
+		 // to remove this unit test's dependency on another class and improve it
+				 //Mockito.mock ( PageModel.class );
 	}
 
 	@Test
@@ -36,6 +47,8 @@ public class TestSitemapModel {
 	public void testGetPage()
 	{
 		sut.add(pageModel);
-		assertEquals ("Pages should be equal", pageModel, sut.get(0));
+		Optional<PageModel> pm = sut.get(pageModel.getUrl());
+		assertTrue ("Page Model should exist, it was just added", pm.isPresent());
+		assertEquals ("Pages should be equal", pageModel, pm.get());
 	}
 }
