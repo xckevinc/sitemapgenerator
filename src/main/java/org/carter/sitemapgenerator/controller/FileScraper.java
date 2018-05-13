@@ -23,12 +23,12 @@ public class FileScraper extends AbstractScraper {
 	/** 
 	 * The immutable file name for this scraper
 	 */
-	private final File file;
+	private File file;
 
 	/**
 	 * Stores the baseUri used to concat absolute URL paths when parsing an HTML file
 	 */
-	protected String baseUri;
+//	protected String baseUri;
 	
 	/**
 	 * The log4j logger used to provide class level logging functions
@@ -47,16 +47,17 @@ public class FileScraper extends AbstractScraper {
 	 * Creates a new FileScraper with the given filename string.
 	 * @param urlName This is the web address this scraper will crawl
 	 */
-	public FileScraper(String fileName, String baseUri) {
+	public FileScraper(String fileName, String domainName) {
+		this();
 		this.file = new File(fileName);
 		this.name = fileName;
-		this.baseUri = baseUri;
+		this.domainName = domainName;
 	}
 
 	@Override
 	protected void initializeDoc() {
 		try {
-				doc = Jsoup.parse(file, "UTF-8", baseUri);
+				doc = Jsoup.parse(file, "UTF-8", domainName);
 		} catch (IOException e) {
 			LOGGER.error("Could not open file: " + file.getName(), e);
 		}
