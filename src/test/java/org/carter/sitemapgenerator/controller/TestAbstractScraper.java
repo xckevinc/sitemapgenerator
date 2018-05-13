@@ -11,7 +11,9 @@ import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.Test;
 
 
 public abstract class TestAbstractScraper {
@@ -156,7 +158,18 @@ public abstract class TestAbstractScraper {
 		}
 	}
 	
+	@Test
+	public void testIsInternalLink() {
+		
+//		Element element = new Element(null);
+//		AbstractScraper.isExternalLink(element);
+	}
 	
+	@Test
+	public void testIsExternalLink() {
+		
+		
+	}
 	
 
 }

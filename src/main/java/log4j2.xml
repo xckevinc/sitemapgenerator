@@ -9,9 +9,17 @@
         </File>
     </Appenders>
     <Loggers>
-        <Root level="trace">
+        <Root level="error">
             <AppenderRef ref="Console" />
             <AppenderRef ref="MyFile"/>
         </Root>
+        <Logger name="org.carter.sitemapgenerator.controller" level="trace" additivity="false">
+        	<AppenderRef ref="Console" />
+            <AppenderRef ref="MyFile"/>
+        </Logger>
+        <Logger name="org.carter.sitemapgenerator.controller.TestSiteCrawler" level="trace" additivity="false">
+        	<AppenderRef ref="Console" />
+            <AppenderRef ref="MyFile"/>
+        </Logger>
     </Loggers>
 </Configuration>

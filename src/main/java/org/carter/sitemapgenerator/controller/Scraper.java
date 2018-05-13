@@ -1,5 +1,6 @@
 package org.carter.sitemapgenerator.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,6 +53,7 @@ public interface Scraper {
 	 * Method responsible for lazy instantiating the Document field for other methods to access.
 	 * 
 	 * @return Optional<Document> the Document object created by the jsoup connection or parse
+	 * @throws IOException 
 	 */
 	Optional<Document> getDoc();
 

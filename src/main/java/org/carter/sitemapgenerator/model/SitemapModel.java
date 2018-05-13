@@ -2,6 +2,7 @@ package org.carter.sitemapgenerator.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -20,7 +21,7 @@ public class SitemapModel {
 	private Map<String, PageModel> pages;
 	
 	public SitemapModel() {
-		pages = new HashMap<>();
+		pages = new LinkedHashMap<>();
 	}
 	
 	public void set(PageModel pageModel) {

@@ -27,11 +27,6 @@ import org.jsoup.nodes.Document;
 public class WebScraper extends AbstractScraper{
 	
 	/** 
-	 * The immutable url name for this scraper
-	 */
-	private final String urlName;
-
-	/** 
 	 * The immutable file name for this scraper
 	 */
 	
@@ -47,7 +42,7 @@ public class WebScraper extends AbstractScraper{
 	 */
 	private WebScraper()
 	{
-		urlName = "";
+//		name = "";
 	}
 
 	/**
@@ -55,7 +50,7 @@ public class WebScraper extends AbstractScraper{
 	 * @param urlName This is the web address this scraper will crawl
 	 */
 	public WebScraper(String urlName ) {
-		this.urlName = urlName;
+		this.name = urlName;
 	}
 	
 	/**
@@ -63,7 +58,7 @@ public class WebScraper extends AbstractScraper{
 	 * @param timeout
 	 * @return
 	 */
-	public WebScraper withTimeout( int timeout )
+	public AbstractScraper withTimeout( int timeout )
 	{
 		this.timeout = timeout;
 		return this;
@@ -74,17 +69,16 @@ public class WebScraper extends AbstractScraper{
 	 * specified name or reads from the local file if this Webscraper was initialized
 	 * with isUrl equal to false.
 	 */
-	protected void initializeDoc()
+	protected void initializeDoc() throws IOException
 	{
-		try {
-			doc = Jsoup.connect(urlName)
+			doc = Jsoup.connect(name)
 					.data("query", "Java")
 					.userAgent("Mozilla")
 					.cookie("auth", "token")
-					.timeout(timeout)
+					.timeout(timeout).ignoreHttpErrors(true).followRedirects(true)
 					.post();
 			
-			LOGGER.trace ( "Connecting to:" + urlName);
+			LOGGER.trace ( "Connecting to:" + name);
 //			Connection con = Jsoup.connect(urlName)
 //					.data("query", "Java")
 //					.userAgent("Mozilla")
@@ -92,9 +86,6 @@ public class WebScraper extends AbstractScraper{
 //					.timeout(timeout);
 //			Connection.Response resp = con.execute();
 //			doc = con.post();
-		} catch (IOException e) {
-			LOGGER.error("Could not establish connection to url: " + urlName, e);
-		}
 	}
 
 }

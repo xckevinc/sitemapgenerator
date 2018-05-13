@@ -11,17 +11,13 @@ import org.jsoup.nodes.Element;
 
 public class SiteCrawler {
 
-	private Scraper scraper;
-
 	private String rootUrl;
 	
 	private int timeout = 100;
+	
+	private static int NUM_RETRIES = 5;
 
 	private static final Logger LOGGER = LogManager.getLogger(SiteCrawler.class);
-
-	public SiteCrawler(Scraper scraper) {
-		this.scraper = scraper;
-	}
 
 	public SiteCrawler (String rootUrl) {
 		this.rootUrl = rootUrl;
@@ -64,11 +60,18 @@ public class SiteCrawler {
 
 
 	private PageModel createPageModel (String url){
-
 		Scraper scraper = new WebScraper(url).withTimeout(timeout);
 		PageModel pageModel = new PageModel(url);
-		pageModel.setTitle(scraper.getDoc().get().title());
-
+		for (int i = 0; i < NUM_RETRIES; i++)
+		{
+			if (scraper.getDoc().isPresent()) {
+				pageModel.setTitle(scraper.getDoc().get().title());
+				break;
+			}
+			else {
+				pageModel.setTitle( "Could not retrieve url: " + url);
+			}
+		}
 		if ( scraper.retrieveExternalLinks().isPresent() ){
 			pageModel.setExternalLinks(scraper.retrieveExternalLinks().get());
 		}

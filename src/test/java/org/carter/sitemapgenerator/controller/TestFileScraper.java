@@ -25,8 +25,7 @@ public class TestFileScraper extends TestAbstractScraper {
 			int totalInternalLinkCount, int totalExternalLinkCount,
 			int totalImageCount ) 
 					throws Exception{
-		File file = new File(getClass().getResource(fileName).toURI());
-		Scraper fileScraper =  new FileScraper(file, baseUri);
+		Scraper fileScraper =  new FileScraper(getClass().getResource(fileName).toURI().getPath(), baseUri);
 		testAllScraperMethods ( fileScraper,  totalLinkCount, totalInternalLinkCount,  totalExternalLinkCount,
 				 totalImageCount );
 	}

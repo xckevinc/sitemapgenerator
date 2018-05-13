@@ -38,13 +38,26 @@ public abstract class AbstractScraper implements Scraper{
 	 */
 	protected Document doc = null;
 
+	/** 
+	 * The immutable url/file name for this scraper
+	 */
+	protected String name;
+
+	protected AbstractScraper()
+	{
+		name = "";
+	}
 
 	@Override
 	public Optional<Document> getDoc()
 	{
 		if ( doc == null )
 		{
-			initializeDoc();
+			try {
+				initializeDoc();
+			} catch (IOException e) {
+				LOGGER.warn("Could not retrieve: " + name, e);
+			}
 		}
 		return Optional.ofNullable( doc );
 	}
@@ -113,7 +126,7 @@ public abstract class AbstractScraper implements Scraper{
 	 * @param element the Element to be checked against the baseUri
 	 * @return boolean representing if the Element contains the baseUri 
 	 */
-	private static boolean isInternalLink ( Element element ){
+	protected static boolean isInternalLink ( Element element ){
 		return element.absUrl("href").contains(element.baseUri());
 	}
 
@@ -124,7 +137,7 @@ public abstract class AbstractScraper implements Scraper{
 	 * @param element the Element to be checked against the baseUri
 	 * @return boolean representing if the Element doesn't contain the baseUri 
 	 */
-	private static boolean isExternalLink ( Element element ){
+	protected static boolean isExternalLink ( Element element ){
 		return !isInternalLink(element);
 	}
 	
@@ -167,8 +180,9 @@ public abstract class AbstractScraper implements Scraper{
 	/**
 	 * The way a Document Object is obtained is dependent on the type of source.  It is
 	 * the responsibility of the concrete sub classes to initialize this Object
+	 * @throws IOException 
 	 */
-	protected abstract void initializeDoc();
+	protected abstract void initializeDoc() throws IOException;
 
 
 }

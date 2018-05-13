@@ -2,6 +2,7 @@ package org.carter.sitemapgenerator.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,8 +48,9 @@ public class FileScraper extends AbstractScraper {
 	 * Creates a new FileScraper with the given filename string.
 	 * @param urlName This is the web address this scraper will crawl
 	 */
-	public FileScraper(File file, String baseUri) {
-		this.file = file;
+	public FileScraper(String fileName, String baseUri) {
+		this.file = new File(fileName);
+		this.name = fileName;
 		this.baseUri = baseUri;
 	}
 
