@@ -1,9 +1,6 @@
 package org.carter.sitemapgenerator.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -20,8 +17,19 @@ public class SitemapModel {
 
 	private Map<String, PageModel> pages;
 	
-	public SitemapModel() {
+	private String domainName;
+
+	private SitemapModel() {
 		pages = new LinkedHashMap<>();
+	}
+	
+	public SitemapModel(String baseUri) {
+		this();
+		this.domainName = baseUri;
+	}
+	
+	public String getDomainName() {
+		return domainName;
 	}
 	
 	public void set(PageModel pageModel) {
@@ -51,7 +59,7 @@ public class SitemapModel {
 	}
 	
 	public Map <String, PageModel> getPages(){
-		return pages;
+		return pages; // TODO consider returning an immutable clone
 	}
 
 }

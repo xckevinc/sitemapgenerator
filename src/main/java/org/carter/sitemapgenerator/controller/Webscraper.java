@@ -1,16 +1,10 @@
 package org.carter.sitemapgenerator.controller;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 
 /**
@@ -38,7 +32,7 @@ public class WebScraper extends AbstractScraper{
 	private static final Logger LOGGER = LogManager.getLogger("WebScraper");
 
 	/* 
-	 * The no argument constructor is hidden to force initialization with the urlName
+	 * The no argument constructor is hidden to force initialization with the urlName and baseUri
 	 */
 	private WebScraper()
 	{
@@ -49,8 +43,9 @@ public class WebScraper extends AbstractScraper{
 	 * Creates a new Webscraper with the given url string.
 	 * @param urlName This is the web address this scraper will crawl
 	 */
-	public WebScraper(String urlName ) {
+	public WebScraper(String urlName, String baseUri ) {
 		this.name = urlName;
+		this.domainName = baseUri;
 	}
 	
 	/**

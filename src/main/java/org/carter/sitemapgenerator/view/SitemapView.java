@@ -1,15 +1,28 @@
 package org.carter.sitemapgenerator.view;
 
+import static j2html.TagCreator.attrs;
+import static j2html.TagCreator.body;
+import static j2html.TagCreator.div;
+import static j2html.TagCreator.each;
+import static j2html.TagCreator.h1;
+import static j2html.TagCreator.h2;
+import static j2html.TagCreator.h3;
+import static j2html.TagCreator.head;
+import static j2html.TagCreator.html;
+import static j2html.TagCreator.link;
+import static j2html.TagCreator.main;
+import static j2html.TagCreator.p;
+import static j2html.TagCreator.table;
+import static j2html.TagCreator.title;
+
+import java.util.Map;
+import java.util.Set;
+
 import org.carter.sitemapgenerator.model.PageModel;
 import org.carter.sitemapgenerator.model.SitemapModel;
 
 import j2html.tags.ContainerTag;
 import j2html.tags.Tag;
-
-import static j2html.TagCreator.*;
-
-import java.util.Map;
-import java.util.Set;
 
 public class SitemapView {
 
@@ -38,17 +51,17 @@ public class SitemapView {
 						                h3("Internal Links"),
 						                //each(pages.get(key).getInternalLinks(), internalLink -> h3(TAB_STRING + internalLink.absUrl("href"))),
 						                table(
-						                		each(pages.get(key).getInternalLinks(), internalLink -> h3(internalLink.absUrl("href"))))
+						                		each(pages.get(key).getInternalLinks(), internalLink -> h3(internalLink)))
 						                		.withStyle("margin-left:20px"),
 						                h3("Internal Link Count:" + pages.get(key).getInternalLinkCount()),
 						                h3("External Links"),
 						                table(
-						                		each(pages.get(key).getExternalLinks(), externalLink -> h3(externalLink.absUrl("href"))))
+						                		each(pages.get(key).getExternalLinks(), externalLink -> h3(externalLink)))
 						                		.withStyle("margin-left:20px"),
 						                h3("External Link Count:" + pages.get(key).getExternalLinkCount()),
 						                h3("Images"),
 						                table(
-						                		each(pages.get(key).getImageRefs(), imageRef -> h3(imageRef. nodeName())))
+						                		each(pages.get(key).getImageRefs(), imageRef -> h3(imageRef)))
 						                		.withStyle("margin-left:20px"),
 						                h3("Image Count:" + pages.get(key).getImageRefCount())
 						                ) 

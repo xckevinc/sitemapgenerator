@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,7 +39,7 @@ public abstract class TestAbstractScraper {
 			throws Exception {
 
 		assertTrue ( "The html document should have parsed", scraper.getDoc().isPresent());
-		Optional<Elements> links = scraper.retrieveInternalLinks();
+		Optional<Set<String>> links = scraper.retrieveInternalLinks();
 		assertTrue ( "The parse of " + scraper.getDoc().get().title() + "should return a set of internal links", 
 				links.isPresent());
 		int linksSize = links.get().size();
@@ -50,7 +51,7 @@ public abstract class TestAbstractScraper {
 			throws Exception {
 
 		assertTrue ( "The html document should have parsed", scraper.getDoc().isPresent());
-		Optional<Elements> links = scraper.retrieveExternalLinks();
+		Optional<Set<String>> links = scraper.retrieveExternalLinks();
 		assertTrue ( "The parse of " + scraper.getDoc().get().title() + "should return a set of external links", 
 				links.isPresent()); 
 		int linksSize = links.get().size();
@@ -64,7 +65,7 @@ public abstract class TestAbstractScraper {
 			throws Exception {
 
 		assertTrue ( "The html document should have parsed", scraper.getDoc().isPresent());
-		Optional<Elements> images = scraper.retrieveImages();
+		Optional<Set<String>> images = scraper.retrieveImages();
 		assertTrue ( "The parse of " + scraper.getDoc().get().title() + "should return a set images", 
 				images.isPresent()); 
 		int linksSize = images.get().size();

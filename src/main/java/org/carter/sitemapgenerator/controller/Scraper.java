@@ -1,8 +1,8 @@
 package org.carter.sitemapgenerator.controller;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -24,7 +24,7 @@ public interface Scraper {
 	 * 
 	 * @return List<String> a list of links from the target url
 	 */
-	Optional<Elements> retrieveExternalLinks();
+	Optional<Set<String>> retrieveExternalLinks();
 
 	/**
 	 * Used to retrieve a collection of all internal links present in the website found
@@ -32,7 +32,7 @@ public interface Scraper {
 	 * 
 	 * @return List<String> a list of links from the target url
 	 */
-	Optional<Elements> retrieveInternalLinks();
+	Optional<Set<String>> retrieveInternalLinks();
 
 	/**
 	 * This method uses the jsoup parsing to extract all "a[href]" links from
@@ -57,6 +57,6 @@ public interface Scraper {
 	 */
 	Optional<Document> getDoc();
 
-	Optional<Elements> retrieveImages();
+	Optional<Set<String>> retrieveImages();
 
 }

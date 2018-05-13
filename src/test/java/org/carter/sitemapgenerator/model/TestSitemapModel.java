@@ -29,7 +29,7 @@ public class TestSitemapModel {
 	@Before
 	public void setup()
 	{
-		 sut = new SitemapModel();
+		 sut = new SitemapModel("testBaseUri");
 		 pageModel = new PageModel ("TestUrl");
 		 // TODO This data should be mocked, I will come back to it or consider this a noted point
 		 // to remove this unit test's dependency on another class and improve it

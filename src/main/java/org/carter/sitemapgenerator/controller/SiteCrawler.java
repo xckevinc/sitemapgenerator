@@ -1,13 +1,9 @@
 package org.carter.sitemapgenerator.controller;
 
-import java.util.ArrayList;
-import java.util.Set;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.carter.sitemapgenerator.model.PageModel;
 import org.carter.sitemapgenerator.model.SitemapModel;
-import org.jsoup.nodes.Element;
 
 public class SiteCrawler {
 
@@ -35,33 +31,35 @@ public class SiteCrawler {
 	}
 
 	public SitemapModel generateSiteMap() {
-		SitemapModel sitemapModel = new SitemapModel();
+		SitemapModel sitemapModel = new SitemapModel(rootUrl);
 		analyzeHtml ( rootUrl, sitemapModel);
 		return sitemapModel;
 	}
 
-	private void analyzeHtml(String url, SitemapModel sitemapModel) {
+	private void analyzeHtml(String sourceUrl, SitemapModel sitemapModel) {
 
-		LOGGER.trace("Analyzing url: " + url );
-		if ( sitemapModel.containsUrl(url) ) {
-			LOGGER.trace("Skipping the url because it was already scanned: " + url);
+		LOGGER.trace("Analyzing url: " + sourceUrl );
+		// Check to see if this page was already scanned and logged
+		if ( sitemapModel.containsUrl(sourceUrl) ) { 
+			LOGGER.trace("Skipping the url because it was already scanned: " + sourceUrl);
 			return;
 		}
-		LOGGER.trace("Processing the contents of url: " + url );
+		LOGGER.trace("Processing the contents of url: " + sourceUrl );
 
-		PageModel pageModel = createPageModel(url);
+		PageModel pageModel = createPageModel(sourceUrl, sitemapModel.getDomainName());
 		sitemapModel.add(pageModel);
-		ArrayList<Element> links = pageModel.getInternalLinks();
-		for ( int i = 0; i < links.size(); i++ )
-		{
-			analyzeHtml( links.get(i).absUrl("href"), sitemapModel);
-		}
+//		ArrayList<Element> links = pageModel.getInternalLinks();
+//		for ( int i = 0; i < links.size(); i++ )
+//		{
+//			analyzeHtml( links.get(i).absUrl("href"), sitemapModel);
+//		}
+		pageModel.getInternalLinks().forEach(link -> analyzeHtml( link, sitemapModel));
 	}
 
 
-	private PageModel createPageModel (String url){
-		Scraper scraper = new WebScraper(url).withTimeout(timeout);
-		PageModel pageModel = new PageModel(url);
+	private PageModel createPageModel (String sourceUrl, String domainName){
+		Scraper scraper = new WebScraper(sourceUrl, domainName).withTimeout(timeout);
+		PageModel pageModel = new PageModel(sourceUrl);
 		for (int i = 0; i < NUM_RETRIES; i++)
 		{
 			if (scraper.getDoc().isPresent()) {
@@ -69,7 +67,7 @@ public class SiteCrawler {
 				break;
 			}
 			else {
-				pageModel.setTitle( "Could not retrieve url: " + url);
+				pageModel.setTitle( "Could not retrieve url: " + sourceUrl);
 			}
 		}
 		if ( scraper.retrieveExternalLinks().isPresent() ){

@@ -1,8 +1,9 @@
 package org.carter.sitemapgenerator.model;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-import org.apache.logging.log4j.message.Message;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -13,36 +14,37 @@ import org.jsoup.select.Elements;
  */
 public class PageModel {
 	
-	private Elements externalLinks;
+	private Set<String> externalLinks;
 	
-	private Elements internalLinks;
+	private Set<String> internalLinks;
 	
-	private Elements imageRefs;
+	private Set<String> imageRefs;
 
 	private String title;
 
 	private String url;
 
-	private PageModel()
-	{}
+	private PageModel() {
+		externalLinks = new LinkedHashSet<>();
+		internalLinks = new LinkedHashSet<>();
+		imageRefs = new LinkedHashSet<>();
+	}
 	
 	public PageModel(String url) {
-		externalLinks = new Elements();
-		internalLinks = new Elements();
-		imageRefs = new Elements();
+		this();
 		this.url = url;
 	}
 	
-	public void setExternalLinks(Elements externalLinks) {
+	public void setExternalLinks(Set<String> externalLinks) {
 		this.externalLinks = externalLinks;
 		
 	}
 
-	public Elements getExternalLinks() {
+	public Set<String> getExternalLinks() {
 		return this.externalLinks;
 	}
 
-	public void addExternalLink(Element newLink) {
+	public void addExternalLink(String newLink) {
 		externalLinks.add(newLink);
 	}
 
@@ -50,15 +52,15 @@ public class PageModel {
 		return externalLinks.size();
 	}
 
-	public void setInternalLinks(Elements internalLinks) {
+	public void setInternalLinks(Set<String> internalLinks) {
 		this.internalLinks = internalLinks;
 	}
 	
-	public ArrayList<Element> getInternalLinks() {
+	public Set<String> getInternalLinks() {
 		return internalLinks;
 	}
 
-	public void addInternalLink(Element newLink) {
+	public void addInternalLink(String newLink) {
 		internalLinks.add(newLink);
 	}
 
@@ -66,15 +68,15 @@ public class PageModel {
 		return internalLinks.size();
 	}
 	
-	public void setImageRefs(Elements imageRefs) {
+	public void setImageRefs(Set<String> imageRefs) {
 		this.imageRefs = imageRefs;
 	}
 
-	public Elements getImageRefs() {
+	public Set<String> getImageRefs() {
 		return imageRefs;
 	}
 
-	public void addImageRef(Element newImageRef) {
+	public void addImageRef(String newImageRef) {
 		imageRefs.add(newImageRef);
 	}
 
