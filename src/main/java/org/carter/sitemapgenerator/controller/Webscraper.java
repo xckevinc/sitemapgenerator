@@ -74,6 +74,7 @@ public class WebScraper extends AbstractScraper{
 				.timeout(timeout).ignoreHttpErrors(true).followRedirects(true)
 				.post();
 
+		// Alternate code to capture connection errors
 		//			Connection con = Jsoup.connect(urlName)
 		//					.data("query", "Java")
 		//					.userAgent("Mozilla")

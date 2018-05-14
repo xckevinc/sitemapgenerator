@@ -7,18 +7,38 @@ This project is written in java, built with Maven, and developed in Eclipse Oxyg
 
 To build requires Maven and Java 1.8.
 1) [Assumed] Checkout the sitemapgenerator project from github
-2) From a shell and the sitemapgenerator folder, execute "mvn install"
-	The Default profile is "Local" and this runs only tests that don't depend on the internet.
-	The alternative profile for testing with the dataset of live websites is "Internet"
-	Also available is the profile "Full" for both Local file based test and Internet based tests.
+2) From a shell and the sitemapgenerator folder, execute "mvn compile"
+>mvn compile
+or
+>mvn clean compile
+
+
+//***** Test Instructions **************
+1) From a shell run the maven install command (needed for Lg4j config files)
+>mvn clean install
+
+The Default profile is "Local" and this runs only tests that don't depend on the internet.
+The alternative profile for testing with the dataset of live websites is "Internet"
+Also available is the profile "Full" for both Local file based test and Internet based tests.
+To run either alternate test configurations AFTER a maven install has completed use:
+>mvn test -P Internet
+or
+>mvn test -P Full
+
+//***** Packaging Instructions ***********
+1) From a shell run the maven package command
+>mvn package
+
+//***** Running Instructions *************
+1) From a shell, navigate to the target director
+cd target
+
 
 TODO Verify dependency installation and add packaging or running instructions and a start script
 //****************************************
 
 Design and planning artifacts are located in sitemapgenerator/design
 
-TODO Create algorithm and architecture
-TODO Develop Tests and Code
 
 Requirements:
 1) A README.md
@@ -91,6 +111,10 @@ Tradeoffs:
   
   The gui should be updated with a multi threaded architecture for generating the sitemaps, displaying scan status in the GUI, and
   displaying the final output rather than the current hijacking of the event thread for the entire duration of the website scan.
+  
+  The GUI could use refinement and polish to match the layout of the design.
+  
+  The GUI could use the "Save Sitemap" button from the original design to preserve the output for later analysis.
   
   
   
