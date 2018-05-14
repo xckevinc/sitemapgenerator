@@ -37,8 +37,8 @@ public class SitemapView {
 		Map<String, PageModel> pages = sitemapModel.getPages();
 		ContainerTag ct = html(
 				head(
-						title("Sitemp"),
-						link().withRel("stylesheet").withHref("/css/main.css")
+						title("Sitemp")//,
+						//link().withRel("stylesheet").withHref("/css/main.css")
 						),
 				body(
 						main(attrs("#main.content"),
@@ -49,7 +49,6 @@ public class SitemapView {
 						                h2(pages.get(key).getTitle()),
 						                p(pages.get(key).getUrl()),
 						                h3("Internal Links"),
-						                //each(pages.get(key).getInternalLinks(), internalLink -> h3(TAB_STRING + internalLink.absUrl("href"))),
 						                table(
 						                		each(pages.get(key).getInternalLinks(), internalLink -> h3(internalLink)))
 						                		.withStyle("margin-left:20px"),
@@ -65,8 +64,6 @@ public class SitemapView {
 						                		.withStyle("margin-left:20px"),
 						                h3("Image Count:" + pages.get(key).getImageRefCount())
 						                ) 
-//						                each(pages.get(key).getInternalLinks(), internalLink -> h3("test") )
-//									.withStyle("font-weight: bold")
 									)
 								)
 						)
