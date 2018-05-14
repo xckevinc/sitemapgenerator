@@ -19,13 +19,13 @@ import org.jsoup.Jsoup;
  */
 
 public class WebScraper extends AbstractScraper{
-	
+
 	/** 
 	 * The immutable file name for this scraper
 	 */
-	
+
 	private int timeout = 3000;
-	
+
 	/**
 	 * The log4j logger used to provide class level logging functions
 	 */
@@ -36,7 +36,7 @@ public class WebScraper extends AbstractScraper{
 	 */
 	private WebScraper()
 	{
-//		name = "";
+		//		name = "";
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class WebScraper extends AbstractScraper{
 		this.name = urlName;
 		this.domainName = baseUri;
 	}
-	
+
 	/**
 	 * Optionally specify a timeout following the Builder Pattern
 	 * @param timeout
@@ -58,7 +58,7 @@ public class WebScraper extends AbstractScraper{
 		this.timeout = timeout;
 		return this;
 	}
-	
+
 	/**
 	 * The Document initializer method that either establishes the HTTPConnection to the
 	 * specified name or reads from the local file if this Webscraper was initialized
@@ -66,21 +66,21 @@ public class WebScraper extends AbstractScraper{
 	 */
 	protected void initializeDoc() throws IOException
 	{
-			doc = Jsoup.connect(name)
-					.data("query", "Java")
-					.userAgent("Mozilla")
-					.cookie("auth", "token")
-					.timeout(timeout).ignoreHttpErrors(true).followRedirects(true)
-					.post();
-			
-			LOGGER.trace ( "Connecting to:" + name);
-//			Connection con = Jsoup.connect(urlName)
-//					.data("query", "Java")
-//					.userAgent("Mozilla")
-//					.cookie("auth", "token")
-//					.timeout(timeout);
-//			Connection.Response resp = con.execute();
-//			doc = con.post();
+		LOGGER.trace ( "Connecting to:" + name);
+		doc = Jsoup.connect(name)
+				.data("query", "Java")
+				.userAgent("Mozilla")
+				.cookie("auth", "token")
+				.timeout(timeout).ignoreHttpErrors(true).followRedirects(true)
+				.post();
+
+		//			Connection con = Jsoup.connect(urlName)
+		//					.data("query", "Java")
+		//					.userAgent("Mozilla")
+		//					.cookie("auth", "token")
+		//					.timeout(timeout);
+		//			Connection.Response resp = con.execute();
+		//			doc = con.post();
 	}
 
 }

@@ -48,11 +48,6 @@ public class SiteCrawler {
 
 		PageModel pageModel = createPageModel(sourceUrl, sitemapModel.getDomainName());
 		sitemapModel.add(pageModel);
-//		ArrayList<Element> links = pageModel.getInternalLinks();
-//		for ( int i = 0; i < links.size(); i++ )
-//		{
-//			analyzeHtml( links.get(i).absUrl("href"), sitemapModel);
-//		}
 		pageModel.getInternalLinks().forEach(link -> analyzeHtml( link, sitemapModel));
 	}
 
@@ -67,7 +62,7 @@ public class SiteCrawler {
 				break;
 			}
 			else {
-				pageModel.setTitle( "Could not retrieve url: " + sourceUrl);
+				pageModel.setTitle( "Non-HTML Page: " + sourceUrl);
 			}
 		}
 		if ( scraper.retrieveExternalLinks().isPresent() ){

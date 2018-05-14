@@ -3,7 +3,9 @@ package org.carter.sitemapgenerator.controller;
 import java.io.File;
 import java.util.List;
 
+import org.carter.LocalTests;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * A set of tests for retrieving and parsing HTML from a file.  These tests will define the structure
@@ -39,6 +41,7 @@ public class TestFileScraper extends TestAbstractScraper {
 	 * 
 	 */
 	@Test
+	@Category(LocalTests.class)
 	public void testFileScraper () 
 			throws Exception{
 

@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.carter.InternetTests;
+import org.carter.LocalTests;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import junit.framework.TestCase;
 
@@ -52,6 +55,7 @@ public class TestWebScraper extends TestAbstractScraper {
 	 * 
 	 */
 	@Test
+	@Category(InternetTests.class)
 	public void testWebScraper () 
 			throws Exception{
 

@@ -121,7 +121,7 @@ public class SitemapGenerator
 		JScrollPane scrollPane = new JScrollPane(app.getPanel());     
 		JFrame f = new JFrame("Sitemap Generator");
 		f.getContentPane().add(app.getPanel());
-		f.setSize(812, 442);
+		f.setSize(1000, 800);
 		f.show();
 	}
 
