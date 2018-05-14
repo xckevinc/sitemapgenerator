@@ -77,6 +77,7 @@ public class SitemapGenerator
 				SitemapView sitemapView = new SitemapView(sitemapModel);
 				String htmlView = sitemapView.generateHtmlView();
 				sitemapOutputPane.setText(htmlView);
+				sitemapOutputPane.setCaretPosition(0);
 				
 			}
 			
