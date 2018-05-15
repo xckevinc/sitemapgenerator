@@ -18,7 +18,7 @@ public class TestSitemapView {
 		SiteCrawler siteGenerator = new SiteCrawler("https://jsoup.org/").withTimeout(DEFAULT_URL_TIMEOUT); 
 		//siteGenerator = new SiteCrawler("https://www.apache.org/").withTimeout(DEFAULT_URL_TIMEOUT); 
 
-		siteGenerator = new SiteCrawler("http://ralstones.jeffcopublicschools.org/").withTimeout(DEFAULT_URL_TIMEOUT); 
+		siteGenerator = new SiteCrawler("http://www.rmhpa.org//").withTimeout(DEFAULT_URL_TIMEOUT); 
 		SitemapModel sitemapModel = siteGenerator.generateSiteMap();
 		SitemapView sitemapView = new SitemapView(sitemapModel);
 		String htmlView = sitemapView.generateHtmlView();
