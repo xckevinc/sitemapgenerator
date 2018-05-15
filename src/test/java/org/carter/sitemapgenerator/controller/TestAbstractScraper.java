@@ -121,7 +121,6 @@ public abstract class TestAbstractScraper {
 			throws Exception{
 
 		List<Object> testConfigParameters = new ArrayList<>();
-		File file = new File(getClass().getResource(testConfigFile).toURI());
 		try (Scanner scanner = new Scanner(new File(getClass().getResource(testConfigFile).toURI()));) {
 			Scanner lineScanner;
 			while ( scanner.hasNext())
