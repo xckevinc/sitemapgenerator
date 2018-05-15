@@ -1,0 +1,6 @@
+# This configuration file establishes the list of HTML's to be analyzed and their expected results
+# The token values are defined below, baseUri is optional and only for local HTML from the filesystem
+# -totalLinkCount -totalInternalLinkCount -totalExternalLinkCount -totalImageCount -file/url name -(Optional) baseURI name
+45 28 8 0 /org/carter/sitemapgenerator/controller/jsoup.html https://jsoup.org/
+219 102 27 20 /org/carter/sitemapgenerator/controller/ozreport.html http://ozreport.com
+334 39 266 7 /org/carter/sitemapgenerator/controller/Apache.html https://www.apache.org/

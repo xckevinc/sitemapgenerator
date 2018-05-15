@@ -1,0 +1,9 @@
+# Testing link counts off the internet is the furthest thing from consistent.  This data file allows
+# the customizing of the data set for specific sites and expected outcomes.  rmhpa.org is the most consistent
+# of the group so therefore is the only one enabled by default.  Test entries are skipped with a "#" comment character
+# The token values are defined below,
+# -totalLinkCount -totalInternalLinkCount -totalExternalLinkCount -totalImageCount -file/url name -(Optional) baseURI name
+#220 163 57 22 http://www.cnn.com 
+#221 95 33 22 http://ozreport.com
+41 23 7 8 http://www.rmhpa.org
+#0 0 0 0 https://jsoup.org

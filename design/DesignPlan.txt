@@ -1,0 +1,58 @@
+
+Target Audience:
+Other developers
+
+Target Platform:
+Windows, Mac, or Linux
+
+Hardware Requirements:
+Any modern hardware, no specific ram, cpu, or graphics requirements
+Internet access to run.
+
+
+Software Requirements:
+To Build: Maven, JDK
+To Run: JRE
+
+Requirements (From README.md):
+1) A README.md
+2) Build Instructions
+3) Test Instructions
+4) Run instructions
+5) Trade Offs explanation and reasoning
+6) Possible points of enhancement given more time
+7) A webcrawler that indexes every link in a domain
+8) A sitemap listing the following link details from the base domain
+ 8a) Links to pages in the same domain
+ 8b) Links to pages outside the domain
+ 8c) Links to static content 
+9) Basic view of the output of the data from 8
+
+Architecture:
+Java based swing application.  Swing can be used both for the input of data (in this case just a simple website address)
+and for the presentation of results.
+
+Layout:
+
+Since this project design is narrow and only includes only the url input, the design steps are simpler,
+just a basic wireframe layout, visual layout with content, flow, and then code.
+  
+
+Architecture:
+This project will be designed with the MVC pattern.  
+
+The View first will include GUI elements for inputting the URL string, buttons to generate
+the sitemap, and a HTML view of the structured output.  
+
+The controller will include an interface for connecting to a URL, the ability to read and parse the URL contents, logic to 
+organize links by internal, external, and static refs and a recursive utility to traverse all internal links. 
+
+The Model will include data structures to store a collection of links, the 3 types of links per page and the pages as a tree node
+or list element.  Finally a tree or list to store all of the pages traversed in the domain.  The motivation to use a tree stems
+from an initial interpretation that the output should be structured to show parentage but in planning an requirement analysis 
+there is not a requirement to support that extra complexity.  Therefore that should be set aside as an improvement or an alternative
+layout if there was a collaborative team or customer for review.
+  
+Lastly the View will include a component to generate an HTML view from the tree structure, and Swing element to display that HTML view
+in the application window. 
+
