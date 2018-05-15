@@ -32,8 +32,8 @@ or
 >mvn install
 
 //***** Running Instructions *************
-1) From a shell, navigate to the target director
-cd target
+1) From a shell, navigate to the target directory:
+>cd target
 2) type in the java command to run the jar directly:
 >java -jar sitemapgenerator-1.0-jar-with-dependencies.jar
 
