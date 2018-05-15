@@ -5,7 +5,7 @@ text of the exercise can be found at the end of this document.
 
 This project is written in java, built with Maven, and developed in Eclipse Oxygen.
 
-To build requires Maven and Java 1.8.  I built it with Maven 3.5.3.
+To build requires Maven, Java 1.8, and an internet connection for retrieving dependencies.  I built it with Maven 3.5.3.
 1) [Assumed] Checkout the sitemapgenerator project from github
 2) From a shell and the sitemapgenerator folder, execute "mvn compile"
 >mvn compile
@@ -14,8 +14,8 @@ or
 
 
 //***** Test Instructions **************
-1) From a shell run the maven install command (needed for Lg4j config files)
->mvn clean install
+1) From a shell run the maven test command 
+>mvn test
 
 The Default profile is "Local" and this runs only tests that don't depend on the internet.
 The alternative profile for testing with the dataset of live websites is "Internet"
@@ -24,17 +24,19 @@ To run either alternate test configurations AFTER a maven install has completed 
 >mvn test -P Internet
 or
 >mvn test -P Full
+or
+>mvn test -P Local
 
 //***** Packaging Instructions ***********
-1) From a shell run the maven package command
->mvn package
+1) From a shell run the maven install command
+>mvn install
 
 //***** Running Instructions *************
 1) From a shell, navigate to the target director
 cd target
+2) type in the java command to run the jar directly:
+>java -jar sitemapgenerator-1.0-jar-with-dependencies.jar
 
-
-TODO Verify dependency installation and add packaging or running instructions and a start script
 //****************************************
 
 Design and planning artifacts are located in sitemapgenerator/design
@@ -101,25 +103,32 @@ Tradeoffs:
   more time and real goals in a production environment, I would have separated these by scope so that developmental
   tests would not rely on file operations, data sets, and even web queries to keep speed up.  For this project I
   was more interested in providing more then just bare bones testing so the suite has been structured this way.  
-  Going beyond, I would like to add other scopes to handle different testing scenarios. --NOTE-- I just added 
+  Going beyond, I would like to add other scopes to handle different testing scenarios. --NOTE-- I later added 
   Configuration tags and Profiles to enable dual mode testing.
   
   The WebScrapper should be re-factored to cache the link collections created from each request for internal/external/images.
+    Currently those filtered collections are created each time and a cache would be more efficient. 
   
   The Maven plugins should be further configured to properly package the deliverable.  Removing snapshot versions, packaging 
   any dependencies, copying start scripts, managing an installer, etc.
   
-  The gui should be updated with a multi threaded architecture for generating the sitemaps, displaying scan status in the GUI, and
-  displaying the final output rather than the current hijacking of the event thread for the entire duration of the website scan.
+  The GUI should be updated with a multi threaded architecture for generating the sitemaps.  This would allow enhancements
+    like displaying scan status in the GUI (either percent complete or current URL), allowing a cancel, and also displaying 
+    the final output when ready rather than the current hijacking of the event thread for the entire duration of the website 
+    scan.
   
   The GUI could use refinement and polish to match the layout of the design.
   
   The GUI could use the "Save Sitemap" button from the original design to preserve the output for later analysis.
   
+  The GUI could have been developed with tests to verify creation and configuration of components but since this 
+  	isn't production code, and visual inspection is arguably more appropriate in this case, I did not create those
+  
   The Listener on the URL Text Field should run URL validation as the user enters data so the box border could be
-    colored to show status in advance.
+    colored to show status in advance of intiated the scan.
   
-  
+  The handling of non HTML internal links like pdf's that are directly available in a web browser could be handled 
+    more clearly.
   
 
 
