@@ -6,7 +6,7 @@ text of the exercise can be found at the end of this document.
 This project is written in java, built with Maven, and developed in Eclipse Oxygen.
 
 To build requires Maven, Java 1.8, and an internet connection for retrieving dependencies.  I built it with Maven 3.5.3.
-1) Checkout the sitemapgenerator project from github
+1) Checkout the sitemapgenerator project from github (develop branch)
 2) From a shell and the sitemapgenerator folder, execute "mvn compile"
 >mvn compile
 or
