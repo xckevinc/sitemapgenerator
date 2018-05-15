@@ -20,7 +20,7 @@ or
 The Default profile is "Local" and this runs only tests that don't depend on the internet.
 The alternative profile for testing with the dataset of live websites is "Internet"
 Also available is the profile "Full" for both Local file based test and Internet based tests.
-To run either alternate test configurations AFTER a maven install has completed use:
+To run either alternate test configurations use:
 >mvn test -P Internet
 or
 >mvn test -P Full
