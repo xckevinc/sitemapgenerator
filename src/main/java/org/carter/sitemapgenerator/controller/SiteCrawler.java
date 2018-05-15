@@ -9,7 +9,7 @@ public class SiteCrawler {
 
 	private String rootUrl;
 	
-	private int timeout = 100;
+	private int timeout = 1000;
 	
 	private static int NUM_RETRIES = 5;
 

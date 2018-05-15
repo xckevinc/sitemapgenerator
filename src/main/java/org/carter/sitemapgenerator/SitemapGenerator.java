@@ -32,25 +32,25 @@ import org.carter.sitemapgenerator.view.SitemapView;
 public class SitemapGenerator 
 {
 	
-	JPanel panel;
+	protected JPanel panel;
 	
-	JScrollPane scrollPane;
+	protected JScrollPane scrollPane;
 	
-	JSplitPane splitPane;
+	protected JSplitPane splitPane;
 	
-	JTextField urlEntry;
+	protected JTextField urlEntry;
 	
-	JLabel urlLabel;
+	protected JLabel urlLabel;
 	
-	JPanel titlePane;
+	protected JPanel titlePane;
 	
-	JPanel inputPane;
+	protected JPanel inputPane;
 	
-	JScrollPane outputPane;
+	protected JScrollPane outputPane;
 	
-	JEditorPane sitemapOutputPane;
+	protected JEditorPane sitemapOutputPane;
 	
-	JButton generateSitemapButton;
+	protected JButton generateSitemapButton;
 	
 	protected void createComponents() {
 		
@@ -60,11 +60,9 @@ public class SitemapGenerator
 
 			@Override
 			public void propertyChange(PropertyChangeEvent evt) {
-				// TODO Auto-generated method stub
+				// TODO Consider doing URL validation here
 				
 			}
-
-			
 		});
 		
 		generateSitemapButton = new JButton ("Generate Sitemap");
@@ -82,6 +80,8 @@ public class SitemapGenerator
 			}
 			
 		});
+		
+		// TODO:  Add a "Save Sitemap" button here
 		
 		inputPane = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		

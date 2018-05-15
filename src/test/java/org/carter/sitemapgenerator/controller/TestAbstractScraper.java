@@ -1,6 +1,7 @@
 package org.carter.sitemapgenerator.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.*;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -12,12 +13,15 @@ import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.carter.InternetTests;
+import org.carter.LocalTests;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
-
-public abstract class TestAbstractScraper {
+@Category({InternetTests.class, LocalTests.class})
+public  class TestAbstractScraper {
 
 	
 	protected Logger LOGGER = LogManager.getLogger( "TestAbstractScraper");
@@ -161,15 +165,20 @@ public abstract class TestAbstractScraper {
 	
 	@Test
 	public void testIsInternalLink() {
-		
-//		Element element = new Element(null);
-//		AbstractScraper.isExternalLink(element);
+		String link = "http://ozreport.com/1525054512";
+		String domainName = "http://ozreport.com";
+		Element elementMock = mock (Element.class);
+		when(elementMock.absUrl("href")).thenReturn(link);
+		assertTrue("The link should be an internal link", AbstractScraper.isInternalLink(elementMock, domainName));
 	}
 	
 	@Test
 	public void testIsExternalLink() {
-		
-		
+		String link = "http://cnn.com/1525054512";
+		String domainName = "http://ozreport.com";
+		Element elementMock = mock (Element.class);
+		when(elementMock.absUrl("href")).thenReturn(link);
+		assertTrue("The link should be an External link", AbstractScraper.isExternalLink(elementMock, domainName));
 	}
 	
 

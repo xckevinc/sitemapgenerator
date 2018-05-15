@@ -8,16 +8,20 @@ import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.carter.InternetTests;
+import org.carter.LocalTests;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 /**
  * Tests the PageModel for basic accessors
  * @author krcarte
  *
  */
+@Category({InternetTests.class, LocalTests.class})
 public class TestPageModel  {
 
 	protected String link1;

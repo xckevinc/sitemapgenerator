@@ -162,7 +162,9 @@ public abstract class AbstractScraper implements Scraper{
 			Elements elems = doc.get().getElementsByTag("img");
 			Iterator<Element> it = elems.iterator(); // { //.forEach(image -> tempImages.add(image.absUrl("href")));
 			while ( it.hasNext() ) {
-				tempImages.add(it.next().attr("src"));
+				Element next = it.next();
+				tempImages.add(next.attr("src"));
+				LOGGER.trace(next.attr("src") + " added to Images");
 			}
 		}
 		return Optional.of (tempImages);

@@ -36,7 +36,6 @@ public class WebScraper extends AbstractScraper{
 	 */
 	private WebScraper()
 	{
-		//		name = "";
 	}
 
 	/**
@@ -44,6 +43,7 @@ public class WebScraper extends AbstractScraper{
 	 * @param urlName This is the web address this scraper will crawl
 	 */
 	public WebScraper(String urlName, String baseUri ) {
+		this();
 		this.name = urlName;
 		this.domainName = baseUri;
 	}

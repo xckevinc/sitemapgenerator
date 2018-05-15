@@ -5,7 +5,7 @@ text of the exercise can be found at the end of this document.
 
 This project is written in java, built with Maven, and developed in Eclipse Oxygen.
 
-To build requires Maven and Java 1.8.
+To build requires Maven and Java 1.8.  I built it with Maven 3.5.3.
 1) [Assumed] Checkout the sitemapgenerator project from github
 2) From a shell and the sitemapgenerator folder, execute "mvn compile"
 >mvn compile
@@ -115,6 +115,9 @@ Tradeoffs:
   The GUI could use refinement and polish to match the layout of the design.
   
   The GUI could use the "Save Sitemap" button from the original design to preserve the output for later analysis.
+  
+  The Listener on the URL Text Field should run URL validation as the user enters data so the box border could be
+    colored to show status in advance.
   
   
   

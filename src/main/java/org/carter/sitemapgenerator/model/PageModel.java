@@ -1,11 +1,8 @@
 package org.carter.sitemapgenerator.model;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 /**
  * A PageModel is a basic ADT to encapsulate the metadata from a html page scan

@@ -5,17 +5,21 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Optional;
 
+import org.carter.InternetTests;
+import org.carter.LocalTests;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mockito;
 
 import junit.framework.TestCase;
-
+import static org.mockito.Mockito.*;
 /**
  * Test the SitemapModel accessors
  * @author krcarte
  *
  */
+@Category({InternetTests.class, LocalTests.class})
 public class TestSitemapModel {
 
 	/*
@@ -23,32 +27,30 @@ public class TestSitemapModel {
 	 * I am including just the basics as a step in my data structure design process
 	 */
 
-	SitemapModel sut;
-	PageModel pageModel;
+	protected SitemapModel sut;
+	protected PageModel pageModelMock;
 	
 	@Before
 	public void setup()
 	{
 		 sut = new SitemapModel("testBaseUri");
-		 pageModel = new PageModel ("TestUrl");
-		 // TODO This data should be mocked, I will come back to it or consider this a noted point
-		 // to remove this unit test's dependency on another class and improve it
-				 //Mockito.mock ( PageModel.class );
+		 pageModelMock = mock(PageModel.class);
+		 when(pageModelMock.getUrl()).thenReturn("TestUrl");
 	}
 
 	@Test
 	public void testPageAdd()
 	{
-		sut.add(pageModel);
+		sut.add(pageModelMock);
 		assertEquals ("Sitemap should have one page", 1, sut.size());
 	}
 	
 	@Test
 	public void testGetPage()
 	{
-		sut.add(pageModel);
-		Optional<PageModel> pm = sut.get(pageModel.getUrl());
+		sut.add(pageModelMock);
+		Optional<PageModel> pm = sut.get(pageModelMock.getUrl());
 		assertTrue ("Page Model should exist, it was just added", pm.isPresent());
-		assertEquals ("Pages should be equal", pageModel, pm.get());
+		assertEquals ("Pages should be equal", pageModelMock, pm.get());
 	}
 }

@@ -1,6 +1,5 @@
 package org.carter.sitemapgenerator.controller;
 
-import java.io.File;
 import java.util.List;
 
 import org.carter.LocalTests;
