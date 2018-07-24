@@ -11,6 +11,8 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
@@ -65,6 +67,14 @@ public class SitemapGenerator
 			public void keyTyped(KeyEvent e) {
 				// Here is the alternate logical structure Kashif alluding to
 				generateSitemapButton.setEnabled(urlEntry.getText().startsWith("http://"));
+				
+				// here is the regex matching we pulled up on Google but opted for a simple prefix check instead.
+				String urlText = urlEntry.getText();
+				Pattern urlPattern = Pattern.compile ( "^(?:(?:http(?:s)?|ftp)://)(?:\\S+(?::(?:\\S)*)?@)?(?:(?:[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-\uffff])+)(?:\\.(?:[a-z0-9\u00a1-\uffff](?:-)*)*(?:[a-z0-9\u00a1-\uffff])+)*(?:\\.(?:[a-z0-9\u00a1-\uffff]){2,})(?::(?:\\d){2,5})?(?:/(?:\\S)*)?$");
+				
+				// and here is an alternate regex that is not as restrictive
+				urlPattern = Pattern.compile ( "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+				generateSitemapButton.setEnabled ( urlPattern.matcher(urlText).matches());
 			}
 
 			@Override
