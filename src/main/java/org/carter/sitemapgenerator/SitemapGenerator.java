@@ -3,15 +3,10 @@ package org.carter.sitemapgenerator;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JButton;
@@ -22,10 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import org.carter.sitemapgenerator.controller.SiteCrawler;
+import org.carter.sitemapgenerator.controller.UrlValidator;
 import org.carter.sitemapgenerator.model.SitemapModel;
 import org.carter.sitemapgenerator.view.SitemapView;
 
@@ -60,6 +54,7 @@ public class SitemapGenerator
 		
 		urlLabel = new JLabel("URL:");
 		urlEntry = new JTextField(30);
+		UrlValidator urlValidator = new UrlValidator();
 		
 		urlEntry.addKeyListener( new KeyListener() {
 
@@ -75,6 +70,9 @@ public class SitemapGenerator
 				// and here is an alternate regex that is not as restrictive
 				urlPattern = Pattern.compile ( "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 				generateSitemapButton.setEnabled ( urlPattern.matcher(urlText).matches());
+				
+				// but the best solution is with a Validator
+				generateSitemapButton.setEnabled(urlValidator.isValid(urlEntry.getText()));
 			}
 
 			@Override
