@@ -125,7 +125,7 @@ Tradeoffs:
   	isn't production code, and visual inspection is arguably more appropriate in this case, I did not create those
   
   The Listener on the URL Text Field should run URL validation as the user enters data so the box border could be
-    colored to show status in advance of intiated the scan.
+    colored to show status in advance of initiating the scan.
   
   The handling of non HTML internal links like pdf's that are directly available in a web browser could be handled 
     more clearly.
