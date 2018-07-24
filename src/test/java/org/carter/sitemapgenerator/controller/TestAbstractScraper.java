@@ -20,7 +20,6 @@ import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-@Category({InternetTests.class, LocalTests.class})
 public  class TestAbstractScraper {
 
 	
@@ -164,6 +163,7 @@ public  class TestAbstractScraper {
 	}
 	
 	@Test
+	@Category({InternetTests.class, LocalTests.class})
 	public void testIsInternalLink() {
 		String link = "http://ozreport.com/1525054512";
 		String domainName = "http://ozreport.com";
@@ -173,6 +173,7 @@ public  class TestAbstractScraper {
 	}
 	
 	@Test
+	@Category({InternetTests.class, LocalTests.class})
 	public void testIsExternalLink() {
 		String link = "http://cnn.com/1525054512";
 		String domainName = "http://ozreport.com";

@@ -13,7 +13,7 @@
             <AppenderRef ref="Console" />
             <AppenderRef ref="LogFile"/>
         </Root>
-        <Logger name="org.carter.sitemapgenerator.controller" level="trace" additivity="false">
+        <Logger name="org.carter.sitemapgenerator.controller" level="debug" additivity="false">
         	<AppenderRef ref="Console" />
             <AppenderRef ref="LogFile"/>
         </Logger>

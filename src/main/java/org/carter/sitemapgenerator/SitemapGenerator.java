@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -56,16 +58,29 @@ public class SitemapGenerator
 		
 		urlLabel = new JLabel("URL:");
 		urlEntry = new JTextField(30);
-		urlEntry.addPropertyChangeListener( new PropertyChangeListener() {
+		
+		urlEntry.addKeyListener( new KeyListener() {
 
 			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				// TODO Consider doing URL validation here
-				
+			public void keyTyped(KeyEvent e) {
+				// Here is the alternate logical structure Kashif alluding to
+				generateSitemapButton.setEnabled(urlEntry.getText().startsWith("http://"));
 			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// Do Nothing
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// Do Nothing				
+			}
+			
 		});
-		
+
 		generateSitemapButton = new JButton ("Generate Sitemap");
+		generateSitemapButton.setEnabled(false);
 		generateSitemapButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -118,12 +133,11 @@ public class SitemapGenerator
 		app.createComponents();
 		app.layoutComponents();
 
-		JScrollPane scrollPane = new JScrollPane(app.getPanel());     
 		JFrame f = new JFrame("Sitemap Generator");
 		f.getContentPane().add(app.getPanel());
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setSize(1000, 800);
-		f.show();
+		f.setVisible(true);
 	}
 
 }

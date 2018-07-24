@@ -6,7 +6,8 @@ text of the exercise can be found at the end of this document.
 This project is written in java, built with Maven, and developed in Eclipse Oxygen.
 
 To build requires Maven, Java 1.8, and an internet connection for retrieving dependencies.  I built it with Maven 3.5.3.
-1) Checkout the sitemapgenerator project from github (develop branch)
+
+1) Checkout the sitemapgenerator project from github (master or develop)
 2) From a shell and the sitemapgenerator folder, execute "mvn compile"
 >mvn compile
 or
@@ -125,7 +126,7 @@ Tradeoffs:
   	isn't production code, and visual inspection is arguably more appropriate in this case, I did not create those
   
   The Listener on the URL Text Field should run URL validation as the user enters data so the box border could be
-    colored to show status in advance of intiated the scan.
+    colored to show status in advance of initiating the scan.
   
   The handling of non HTML internal links like pdf's that are directly available in a web browser could be handled 
     more clearly.

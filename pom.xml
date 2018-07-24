@@ -87,7 +87,11 @@
 	<build>
 		<testResources>
 			<testResource> <!--  This test resource definition is needed to copy the test data over -->
-				<directory>C:\work\sitemapgenerator\src\test\java</directory>
+				<directory>src/test/java</directory>
+				        <includes>
+          					<include>**/*.txt</include>
+          					<include>**/*.html</include>
+        				</includes>
 			</testResource>
 		</testResources>
 		<plugins>

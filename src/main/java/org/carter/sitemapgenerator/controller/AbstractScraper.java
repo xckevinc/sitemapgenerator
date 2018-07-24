@@ -59,7 +59,8 @@ public abstract class AbstractScraper implements Scraper{
 			try {
 				initializeDoc();
 			} catch (IOException e) {
-				LOGGER.warn("Could not retrieve: " + name, e);
+				LOGGER.warn("Could not retrieve: " + name );
+				LOGGER.trace(e);
 			}
 		}
 		return Optional.ofNullable( doc );
